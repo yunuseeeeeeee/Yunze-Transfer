@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Peer-to-Peer (P2P) File Transfer? | Yunze</title>
+    <meta name="description" content="A complete guide to peer-to-peer technology and how it enables private, fast, direct file sharing without cloud servers.">
+    <link rel="canonical" href="https://yunzetransfer.pages.dev/p2p.html">
+    <meta property="og:site_name" content="Yunze Universal Transfer">
+    <meta property="og:title" content="What is Peer-to-Peer (P2P) File Transfer?">
+    <meta property="og:description" content="A complete guide to peer-to-peer technology and how it enables private, fast, direct file sharing without cloud servers.">
+    <meta property="og:url" content="https://yunzetransfer.pages.dev/p2p.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yunzetransfer.pages.dev/yunze-icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What is Peer-to-Peer (P2P) File Transfer?">
+    <meta name="twitter:description" content="A complete guide to peer-to-peer technology and how it enables private, fast, direct file sharing without cloud servers.">
+    <meta name="twitter:image" content="https://yunzetransfer.pages.dev/yunze-icon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="yunze-icon.png">
+    <link rel="apple-touch-icon" href="yunze-icon.png">
+    <meta name="theme-color" content="#00d2ff">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background:#0a0e1a; margin:0; }
+        .content-page { position:static; display:block; }
+    </style>
+</head>
+<body>
+
+<div id="pageP2p" class="content-page open">
+    <div class="content-inner">
+        <a href="index.html" class="content-back" style="text-decoration:none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back to Yunze
+        </a>
+        <h1>What is Peer-to-Peer (P2P) File Transfer?</h1>
+        <p class="subtitle">A complete guide to understanding peer-to-peer technology and how it enables private, fast file sharing.</p>
+
+        <h2>The Traditional Way: Client-Server</h2>
+        <p>In a traditional file sharing model, you upload your file to a central server — think Google Drive, Dropbox, or WeTransfer. The server stores your file, and the recipient downloads it from that server. This is simple and widely understood, but it comes with real trade-offs:</p>
+        <ul>
+            <li>Your file is stored on someone else's infrastructure, often indefinitely</li>
+            <li>File size limits are imposed by the service provider</li>
+            <li>Transfer speed is bottlenecked by server bandwidth, not your connection</li>
+            <li>Your files can be scanned, analyzed, or accessed by the service provider</li>
+            <li>If the service shuts down or restricts your account, you lose access</li>
+        </ul>
+
+        <h2>The P2P Model: Direct Device-to-Device</h2>
+        <p>Peer-to-peer file transfer eliminates the central server from the data path. Instead, the two devices — the sender and the receiver — establish a direct connection with each other and exchange data without any intermediary holding the file.</p>
+        <p>Think of it like this: instead of mailing a letter through a post office that opens and reads it, you hand it directly to the person. The post office might have helped you find their address, but they never touched the envelope.</p>
+
+        <div class="content-highlight">
+            <p>💡 <strong>Key principle:</strong> In P2P transfer, the server helps devices find each other, but it never touches the actual file data. Everything goes directly between the two devices.</p>
+        </div>
+
+        <h2>How WebRTC Powers Modern P2P</h2>
+        <p>WebRTC (Web Real-Time Communication) is an open standard built into every modern browser that enables real-time audio, video, and data communication without plugins. Originally designed for browser-based video calls (used by Google Meet, Discord, and others), WebRTC's data channels are equally powerful for file transfer.</p>
+        <p>WebRTC uses ICE (Interactive Connectivity Establishment) to figure out the best path between two devices. It tries direct connections first, and falls back to relay servers (called TURN servers) only when firewalls block direct connections. This is why Yunze can work across different networks — WiFi to 4G, home network to corporate network.</p>
+
+        <h2>What is a Signaling Server?</h2>
+        <p>Before two devices can connect directly, they need to exchange some initial information — their network addresses, capabilities, and connection preferences. This exchange happens through a "signaling server." Yunze uses PeerJS's signaling infrastructure for this purpose.</p>
+        <p>Crucially, the signaling server only sees connection metadata, not your file data. Once the connection is established, the signaling server is no longer involved. Yunze uses the PeerJS signaling server to broker connections, and then all actual data travels directly between devices.</p>
+
+        <h2>NAT Traversal: Getting Through Firewalls</h2>
+        <p>Most devices don't have a direct public IP address — they're behind a router using NAT (Network Address Translation). This can make direct device-to-device connections tricky. WebRTC handles this using a process called NAT traversal, which finds "holes" in firewalls that allow the two devices to communicate directly.</p>
+        <p>In cases where NAT traversal fails (very strict corporate firewalls, for example), WebRTC falls back to a TURN relay server. Even in this case, the connection remains encrypted end-to-end.</p>
+
+        <h2>Why P2P is Better for Privacy</h2>
+        <p>When you share a file through a cloud service, you're trusting that service with your data — their terms of service, their security practices, their compliance with government requests. With P2P transfer, there's nothing to subpoena: the file was never on a server.</p>
+        <p>WebRTC connections are encrypted using DTLS (Datagram Transport Layer Security), which is the same class of encryption used to secure HTTPS websites. This means your data is protected in transit even when routed through relay servers.</p>
+
+        <h2>P2P vs Cloud: When to Use Each</h2>
+        <p><strong>Use P2P (Yunze) when:</strong></p>
+        <ul>
+            <li>Both parties can be online at the same time</li>
+            <li>You're sharing sensitive files you don't want stored on third-party servers</li>
+            <li>You need to transfer large files without size limits</li>
+            <li>You want maximum transfer speed (direct connection, no server bottleneck)</li>
+        </ul>
+        <p><strong>Use cloud storage when:</strong></p>
+        <ul>
+            <li>The recipient isn't available right now and needs to download later</li>
+            <li>You need to share with many people simultaneously</li>
+            <li>You need permanent storage and retrieval</li>
+        </ul>
+
+        <h2>The Future of P2P</h2>
+        <p>Peer-to-peer technology is becoming increasingly mainstream. As browsers become more capable and WebRTC matures, P2P applications are moving beyond file transfer into collaborative editing, decentralized social networks, and distributed computing. Yunze Universal Transfer is part of this shift toward a more private, user-controlled internet.</p>
+    </div>
+</div>
+
+</body>
+</html>

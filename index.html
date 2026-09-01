@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Yunze Universal Transfer | Secure File Sharing</title>
+  <meta name="description" content="Yunze — free, no-storage P2P file transfer. Share large files across WiFi, 4G/5G and different networks. No signup, no storage, WebRTC encrypted.">
+  <link rel="canonical" href="https://yunzetransfer.pages.dev/">
+  <meta name="google-site-verification" content="KHbfLhfT2NixoliuNL-jtJTUyaWbYWdygtgmAtVz21Y" />
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Yunze Universal Transfer">
+  <meta property="og:title" content="Yunze Universal Transfer | Secure File Sharing">
+  <meta property="og:description" content="Yunze — free, no-storage P2P file transfer. Share large files across WiFi, 4G/5G and different networks. No signup, no storage, WebRTC encrypted.">
+  <meta property="og:url" content="https://yunzetransfer.pages.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://yunzetransfer.pages.dev/yunze-icon.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Yunze Universal Transfer | Secure File Sharing">
+  <meta name="twitter:description" content="Yunze — free, no-storage P2P file transfer. Share large files across WiFi, 4G/5G and different networks. No signup, no storage, WebRTC encrypted.">
+  <meta name="twitter:image" content="https://yunzetransfer.pages.dev/yunze-icon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="yunze-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00d2ff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Yunze">
+<link rel="apple-touch-icon" href="yunze-icon.png">
+    <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Yunze Universal Transfer",
+  "url": "https://yunzetransfer.pages.dev/",
+  "description": "Free, no-storage P2P file transfer. Share large files across WiFi, 4G/5G and different networks.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Yunze"
+  }
+}
+</script>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1 class="logo">⚡ YUNZE</h1>
+        <div class="tagline">Universal Secure File Transfer &mdash; Cross-Network P2P</div>
+        <div style="font-size: 10px; opacity: 0.6; margin-top: 5px;">v3.5.8.1</div>
+    </div>
+
+    <!-- HOME VIEW -->
+    <div id="viewHome" class="view active">
+        <div class="main-card">
+            <div class="tabs">
+                <div class="tab active" id="tabCode" onclick="switchHomeTab('code')">⌨️ Enter Code</div>
+                <div class="tab" id="tabScan" onclick="switchHomeTab('scan')">📷 Scan QR</div>
+            </div>
+
+            <div id="panelCode" class="tab-panel active">
+                <div class="input-group">
+                    <label>Enter Room Code (5 characters)</label>
+                    <input type="text" class="code-input" id="joinCode" placeholder="XXXXX" maxlength="5" autocomplete="off" spellcheck="false">
+                </div>
+                <button class="btn btn-primary" onclick="joinRoom()"><span>🚀</span> Join Room</button>
+            </div>
+
+            <div id="panelScan" class="tab-panel">
+                <!-- iOS: direct camera button (instead of live stream) -->
+                <div id="iosQrPanel" style="display:none;text-align:center;padding:10px 0;">
+
+                    <!-- iOS talimat notu -->
+                    <div style="background:rgba(0,210,255,0.06);border:1px solid rgba(0,210,255,0.2);border-radius:16px;padding:20px 18px;margin-bottom:18px;text-align:left;">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                            <span style="font-size:1.5rem;">📷</span>
+                            <span style="color:var(--primary);font-weight:700;font-size:0.95rem;letter-spacing:0.3px;">How to scan on iPhone / iPad</span>
+                        </div>
+                        <ol style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.9;padding-left:18px;margin:0;">
+                            <li>Open the <strong style="color:rgba(255,255,255,0.85);">Camera</strong> app</li>
+                            <li>Point it at the QR code</li>
+                            <li>Tap the <strong style="color:rgba(255,255,255,0.85);">link notification</strong> that appears</li>
+                        </ol>
+                        <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.07);">
+                            <span style="font-size:0.8rem;color:rgba(255,255,255,0.35);">⚠️ Older devices may not show a link. In that case, ask the host for the <strong style="color:rgba(255,255,255,0.5);">5-character room code</strong> and type it in the <em>Enter Code</em> tab.</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Non-iOS: kamera stream -->
+                <div id="desktopQrPanel">
+                    <div class="scanner-wrap">
+                        <video id="qrVideo" autoplay muted playsinline></video>
+                        <div class="qr-frame"></div>
+                    </div>
+                    <canvas id="qrCanvas" style="position:absolute;top:-9999px;left:-9999px;"></canvas>
+                    <div id="scanStatusDesktop">—</div>
+                    <button class="btn btn-secondary" id="startScanBtn" onclick="startQRScan()" style="max-width:240px;margin:12px auto 0;">📷 Start Camera</button>
+                    <button id="stopScanBtn" onclick="stopQRScan();this.style.display='none';document.getElementById('startScanBtn').style.display='block';" style="display:none;max-width:240px;margin:8px auto 0;width:100%;padding:12px;background:rgba(255,68,68,0.12);border:1px solid rgba(255,68,68,0.3);border-radius:14px;color:rgba(255,120,120,0.9);font-size:0.92rem;font-weight:600;cursor:pointer;">✕ Stop Camera</button>
+                    <div style="margin-top:12px;text-align:center;">
+                        <label style="display:inline-block;padding:8px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:10px;cursor:pointer;color:rgba(255,255,255,0.5);font-size:0.82rem;">
+                            🖼 Upload QR Image
+                            <input type="file" accept="image/*" id="qrGalleryInputDesktop" class="hidden" onchange="scanQRFromPhoto(this)">
+                        </label>
+                    </div>
+
+                    <!-- Desktop QR result card -->
+                    <div id="qrResultCardDesktop" style="display:none;text-align:center;margin-top:16px;">
+                        <div style="background:rgba(0,255,136,0.07);border:1px solid rgba(0,255,136,0.25);border-radius:16px;padding:18px 16px;margin-bottom:14px;">
+                            <div style="color:rgba(255,255,255,0.4);font-size:0.72rem;letter-spacing:2px;margin-bottom:10px;">✅ QR CODE DETECTED</div>
+                            <div id="qrResultCodeDesktop" style="font-size:1.8rem;font-weight:800;color:var(--primary);font-family:'Courier New',monospace;letter-spacing:8px;text-shadow:0 0 20px rgba(0,210,255,0.5);margin-bottom:6px;">—</div>
+                            <div id="qrResultLinkDesktop" style="font-size:0.72rem;color:rgba(255,255,255,0.28);word-break:break-all;margin-top:4px;"></div>
+                        </div>
+                        <button onclick="confirmQRJoin()" style="width:100%;max-width:280px;padding:16px;background:linear-gradient(45deg,var(--success),#00cc6a);border:none;border-radius:14px;color:#000;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 6px 24px rgba(0,255,136,0.3);margin-bottom:8px;">🚀 Join Room</button><br>
+                        <button onclick="resetQRScan()" style="padding:10px 22px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:rgba(255,255,255,0.45);font-size:0.85rem;cursor:pointer;margin-top:4px;">↩ Scan Again</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span>OR</span></div>
+            <button class="btn btn-success" onclick="createRoom()"><span>✨</span> Create New Room</button>
+            <div class="divider"><span>OR</span></div>
+            <button class="btn" onclick="showView('CloudShare')" style="background:linear-gradient(135deg,rgba(150,100,255,0.2),rgba(100,150,255,0.2));border:1px solid rgba(150,100,255,0.4);color:rgba(200,170,255,0.9);">☁️ Cloud Share (No P2P needed)</button>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card"><h4>🌐 Cross-Network</h4><p>Works across WiFi, 4G/5G, different countries. PeerJS relay handles NAT & firewalls automatically.</p></div>
+            <div class="info-card"><h4>🔐 Direct P2P</h4><p>Once connected, data flows directly between devices — no server ever touches your files unless you request a share link.</p></div>
+            <div class="info-card"><h4>📷 Instant QR Connect</h4><p>Host shows QR, guest scans it — connection established automatically.</p></div>
+            <div class="info-card"><h4>🔗 File to Link</h4><p>Convert received files into shareable public download links (via gofile.io or Telegram).</p></div>
+        </div>
+    </div>
+
+    <!-- CLOUD SHARE VIEW -->
+    <div id="viewCloudShare" class="view">
+        <div class="main-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+                <button onclick="showView('Home')" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);border-radius:10px;padding:6px 13px;cursor:pointer;font-size:0.82rem;">← Back</button>
+                <h3 style="margin:0;font-size:1rem;color:rgba(255,255,255,0.9);">☁️ Cloud Share</h3>
+            </div>
+
+            <!-- TABS -->
+            <div class="tabs" style="margin-bottom:18px;">
+                <div class="tab active" id="csTabUpload" onclick="switchCloudTab('upload')">📤 Upload & Get Link</div>
+                <div class="tab" id="csTabDownload" onclick="switchCloudTab('download')">📥 Link → Download</div>
+            </div>
+
+            <!-- UPLOAD PANEL -->
+            <div id="csPanelUpload">
+                <div style="display:flex;gap:8px;margin-bottom:14px;">
+                    <button id="csSvcGofile" onclick="switchCsService('gofile')" style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(150,100,255,0.5);background:rgba(150,100,255,0.22);color:rgba(200,170,255,0.95);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;">☁️ gofile.io</button>
+                    <button id="csSvcTelegram" onclick="switchCsService('telegram')" style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;">📨 Telegram</button>
+                </div>
+                <div id="csDropZone" onclick="document.getElementById('csFileInput').click()" style="border:2px dashed rgba(150,100,255,0.35);border-radius:14px;padding:32px 20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:14px;" onmouseover="this.style.borderColor='rgba(150,100,255,0.7)';this.style.background='rgba(150,100,255,0.07)'" onmouseout="this.style.borderColor='rgba(150,100,255,0.35)';this.style.background='transparent'">
+                    <div style="font-size:2rem;margin-bottom:8px;">📁</div>
+                    <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:600;">Tap to select file</div>
+                    <div id="csDropHint" style="color:rgba(255,255,255,0.35);font-size:0.75rem;margin-top:4px;">Any file type · Uploaded to gofile.io</div>
+                </div>
+                <input type="file" id="csFileInput" class="hidden" onchange="csHandleFile(this.files[0])">
+
+                <div id="csFileInfo" style="display:none;background:rgba(255,255,255,0.05);border-radius:10px;padding:10px 14px;margin-bottom:12px;display:none;align-items:center;gap:10px;">
+                    <span id="csFileEmoji" style="font-size:1.3rem;">📄</span>
+                    <div style="flex:1;min-width:0;">
+                        <div id="csFileName" style="font-size:0.85rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+                        <div id="csFileSize" style="font-size:0.73rem;color:rgba(255,255,255,0.4);"></div>
+                    </div>
+                    <button onclick="csClearFile()" style="background:none;border:none;color:rgba(255,100,100,0.6);cursor:pointer;font-size:1rem;">✕</button>
+                </div>
+
+                <div id="csUploadProgress" style="display:none;margin-bottom:12px;">
+                    <div style="background:rgba(255,255,255,0.08);border-radius:20px;height:6px;overflow:hidden;">
+                        <div id="csProgressBar" style="height:100%;width:0%;background:linear-gradient(90deg,rgba(150,100,255,0.8),rgba(100,150,255,0.8));border-radius:20px;transition:width 0.3s;"></div>
+                    </div>
+                    <div id="csProgressText" style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:5px;text-align:center;"></div>
+                </div>
+
+                <button id="csUploadBtn" onclick="csUpload()" disabled style="width:100%;padding:13px;background:linear-gradient(135deg,rgba(150,100,255,0.3),rgba(100,150,255,0.3));border:1px solid rgba(150,100,255,0.4);color:rgba(200,170,255,0.6);border-radius:14px;cursor:not-allowed;font-size:0.95rem;font-weight:600;transition:all 0.2s;">☁️ Upload & Get Link</button>
+
+                <div id="csLinkResult" style="display:none;margin-top:14px;background:rgba(0,210,100,0.08);border:1px solid rgba(0,210,100,0.25);border-radius:12px;padding:12px 14px;">
+                    <div style="font-size:0.75rem;color:rgba(0,210,100,0.7);margin-bottom:6px;font-weight:600;">✅ Upload successful</div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <a id="csResultLink" href="#" target="_blank" style="flex:1;font-size:0.8rem;color:var(--primary);word-break:break-all;text-decoration:none;"></a>
+                        <button id="csCopyBtn" onclick="csCopyLink()" style="background:rgba(0,210,255,0.12);border:1px solid rgba(0,210,255,0.3);color:var(--primary);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:0.75rem;font-weight:600;white-space:nowrap;transition:all 0.2s;">Copy</button>
+                    </div>
+                    <div id="csLinkTtl" style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:5px;"></div>
+                </div>
+            </div>
+
+            <!-- DOWNLOAD PANEL -->
+            <div id="csPanelDownload" class="hidden">
+                <div class="input-group">
+                    <label>Paste gofile.io or Telegram link</label>
+                    <input type="url" id="csLinkInput" placeholder="https://gofile.io/d/... or https://api.telegram.org/file/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#fff;font-size:0.9rem;box-sizing:border-box;" oninput="csCheckLink()">
+                </div>
+                <button id="csDownloadBtn" onclick="csDownload()" disabled style="width:100%;padding:13px;background:linear-gradient(135deg,rgba(150,100,255,0.3),rgba(100,150,255,0.3));border:1px solid rgba(150,100,255,0.4);color:rgba(200,170,255,0.6);border-radius:14px;cursor:not-allowed;font-size:0.95rem;font-weight:600;transition:all 0.2s;margin-top:10px;">📥 Open Download Page</button>
+                <div style="margin-top:10px;font-size:0.73rem;color:rgba(255,255,255,0.3);text-align:center;">Opens the download link in a new tab</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONNECT VIEW -->
+    <div id="viewConnect" class="view">
+        <div class="main-card">
+            <div class="connect-screen" id="connectScreen">
+                <div class="loader"></div>
+                <h3 id="connectTitle">Connecting...</h3>
+                <div class="peer-code-big" id="connectCode">—</div>
+                <p id="connectDesc">Connecting to PeerJS server...</p>
+                <div class="net-badge" style="margin:14px auto;">🌐 PeerJS — Cross-network supported</div>
+            </div>
+
+            <div id="hostShareArea" class="hidden">
+                <div class="room-display" onclick="copyRoomCode()">
+                    <div style="color:rgba(255,255,255,0.55);font-size:0.85rem;margin-bottom:6px;letter-spacing:2px;">ROOM CODE</div>
+                    <div class="room-code-big" id="hostRoomCode">—</div>
+                    <div class="copy-hint">📋 Click to copy</div>
+                </div>
+                <div class="share-row">
+                    <button class="btn-outline" onclick="copyRoomCode()">📋 Copy Code</button>
+                    <button class="btn-outline" onclick="copyRoomLink()">🔗 Copy Link</button>
+                    <button class="btn-outline" onclick="showQR()">📱 Show QR</button>
+                </div>
+                <p style="text-align:center;color:rgba(255,255,255,0.45);font-size:0.86rem;margin-top:18px;">⏳ Waiting for guest to connect...</p>
+                <div class="net-badge" style="margin:10px auto;">🌐 Works from any network</div>
+            </div>
+
+            <div class="err-box" id="errBox"></div>
+
+            <button class="btn btn-secondary" onclick="resetApp()" style="max-width:240px;margin:22px auto 0;">Cancel</button>
+        </div>
+    </div>
+
+    <!-- TRANSFER VIEW -->
+    <div id="viewTransfer" class="view">
+        <div class="main-card" style="padding:0;overflow:hidden;">
+
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <div style="display:flex;align-items:center;gap:11px;">
+                    <div class="status-dot connected" id="statusDot"></div>
+                    <div>
+                        <div style="font-weight:700;font-size:0.92rem;" id="statusText">Secure P2P Connection Active</div>
+                        <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:1px;">Room: <span id="roomDisplay" style="color:var(--primary);font-family:'Courier New',monospace;letter-spacing:3px;font-weight:700;"></span></div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <span class="net-badge" style="padding:3px 10px;margin-top:0;">🌐 P2P</span>
+                    <div class="chat-speed-badge hidden" id="chatSpeedBadge"><span id="chatSpeedVal">0.0</span> <span class="chat-speed-unit">MB/s</span></div>
+                    <button onclick="resetApp()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.55);border-radius:10px;padding:6px 14px;cursor:pointer;font-size:0.8rem;transition:all 0.25s;" onmouseover="this.style.background='rgba(255,68,68,0.15)';this.style.color='#ff8888';" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='rgba(255,255,255,0.55)';">✕ Leave</button>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-system-msg">🔒 WebRTC encrypted · Files transferred directly peer-to-peer — not stored on servers</div>
+            </div>
+
+            <!-- Transfer Tips Banner -->
+            <div class="transfer-tips-banner hidden" id="transferTipsBanner">
+                <div class="tips-icon">⚠️</div>
+                <div class="tips-body">
+                    <div class="tips-title">Tips for a smooth transfer</div>
+                    <ul class="tips-list">
+                        <li><span>📱</span><span>Keep this tab open on both devices — closing it will disconnect the session.</span></li>
+                        <li><span>📶</span><span>Make sure both devices have an active internet connection (Wi-Fi or mobile data).</span></li>
+                        <li><span>🔄</span><span>If the connection drops, refresh the page on both devices and create a new room.</span></li>
+                        <li><span>⏳</span><span>Large files may take a while — speed depends on both devices' internet connections.</span></li>
+                    </ul>
+                </div>
+                <button class="tips-close" onclick="document.getElementById('transferTipsBanner').style.display='none'" title="Close">✕</button>
+            </div>
+
+            <!-- Attachment Preview -->
+            <div id="attachPreview" style="display:none;padding:0 18px;">
+                <div class="attach-chip">
+                    <span id="attachEmoji" style="font-size:1.1rem;">📄</span>
+                    <span id="attachName" style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:0.83rem;font-weight:600;"></span>
+                    <span id="attachSize" style="font-size:0.73rem;color:rgba(255,255,255,0.4);white-space:nowrap;margin-right:4px;"></span>
+                    <button onclick="clearAttachment()" style="background:none;border:none;color:rgba(255,100,100,0.7);cursor:pointer;font-size:1rem;padding:0;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#ff5555'" onmouseout="this.style.color='rgba(255,100,100,0.7)'">✕</button>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <div class="chat-input-wrap">
+                <div class="chat-input-row">
+                    <button class="chat-attach-btn" onclick="document.getElementById('fileInput').click()" title="Attach file">📎</button>
+                    <input type="file" class="file-input" id="fileInput" multiple onchange="handleFiles(this.files)">
+                    <textarea class="chat-text-input" id="chatTextInput" placeholder="Type a message..." rows="1" onkeydown="chatKeyDown(event)" oninput="autoResizeTextarea(this)"></textarea>
+                    <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()" title="Send">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hidden elements kept for internal log() and calcSpeed() functions -->
+            <div id="logContainer" class="hidden"></div>
+            <span id="statFiles" class="hidden">0</span>
+            <span id="statSize" class="hidden">0 B</span>
+            <span id="statSpeed" class="hidden">0.0</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="speed-float" id="speedFloat">
+    <div class="speed-value" id="speedValue">0.0</div>
+    <div class="speed-label">MB/s</div>
+</div>
+
+<div class="drag-overlay" id="dragOverlay">
+    <div class="drag-overlay-inner">
+        <div class="drag-overlay-icon">📁</div>
+        <div class="drag-overlay-text">Drop to Send</div>
+        <div class="drag-overlay-sub">Files will be attached and sent</div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="qrModal">
+    <div class="modal-box">
+        <h3>📱 Scan to Join</h3>
+        <div id="qrcode"></div>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.83rem;margin-top:9px;">Room: <span id="qrRoom" style="color:var(--primary);font-weight:700;font-family:'Courier New',monospace;letter-spacing:4px;"></span></p>
+        <p style="color:rgba(255,255,255,0.38);font-size:0.78rem;margin-top:5px;">Works from any network</p>
+        <button class="modal-close" onclick="closeQR()">Close</button>
+    </div>
+</div>
+
+<!-- Copy modal — shown when the clipboard API doesn't work in iOS Chrome -->
+<div class="modal" id="copyModal">
+    <div class="modal-box">
+        <h3>📋 Copy Link</h3>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.83rem;margin-bottom:14px;">Hold & select all, then copy:</p>
+        <input id="copyModalInput" type="text" readonly
+            style="width:100%;padding:14px;background:rgba(0,0,0,0.4);border:2px solid rgba(0,210,255,0.4);border-radius:12px;color:var(--primary);font-family:'Courier New',monospace;font-size:0.82rem;text-align:center;word-break:break-all;outline:none;">
+        <button class="modal-close" onclick="document.getElementById('copyModal').classList.remove('active')" style="margin-top:14px;">Done</button>
+    </div>
+</div>
+
+<!-- Share confirm modal -->
+<div class="modal" id="shareConfirmModal">
+    <div class="modal-box">
+        <h3>☁️ Get Share Link</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.88rem;line-height:1.6;margin-bottom:8px;">This will upload the file to a third-party server so others can download it via a link.</p>
+        <div style="background:rgba(255,170,0,0.08);border:1px solid rgba(255,170,0,0.25);border-radius:10px;padding:12px 14px;margin:12px 0;text-align:left;">
+            <div style="color:rgba(255,170,0,0.9);font-size:0.82rem;font-weight:600;margin-bottom:4px;">⚠️ Important</div>
+            <div style="color:rgba(255,255,255,0.55);font-size:0.8rem;line-height:1.5;">The file will be <strong style="color:rgba(255,255,255,0.8);">publicly accessible</strong> via the link. Anyone with the link can download it.<br>Uploaded to: <span class="text-primary">gofile.io → litterbox → 0x0.st</span> (fallback order)</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:16px;">
+            <button onclick="document.getElementById('shareConfirmModal').classList.remove('active')"
+                style="flex:1;padding:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);border-radius:12px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;">
+                Cancel
+            </button>
+            <button id="shareConfirmOkBtn"
+                style="flex:1;padding:12px;background:linear-gradient(45deg,var(--primary),var(--secondary));border:none;color:#000;border-radius:12px;cursor:pointer;font-size:0.9rem;font-weight:700;transition:all 0.2s;">
+                Upload & Get Link
+            </button>
+        </div>
+    </div>
+
+    <!-- HELP VIEW -->
+    <div id="viewHelp" class="view">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:32px 24px;margin:20px 0;opacity:1;">
+            <div style="margin-bottom:24px;">
+                <h2 style="font-size:1.3rem;font-weight:800;color:white;margin:0;">❓ Help &amp; FAQ</h2>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.82rem;margin:4px 0 0;">Frequently asked questions &amp; troubleshooting</p>
+            </div>
+            <div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">🚀</span><span>How do I send a file?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Tap <strong>Create Room</strong> on the home screen. Share the 5-character room code or QR code with the other person. Once they join, tap the 📎 button in chat, select your file, and hit send.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">📥</span><span>How do I receive a file?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Get the 5-character room code from the sender. Type it in the <strong>Enter Code</strong> tab and tap Join — or scan their QR code with the <strong>Scan QR</strong> tab.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">📷</span><span>How does QR code scanning work?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">The host taps Create Room — a QR code appears. The guest goes to <strong>Scan QR</strong> and points their camera at it. Connection starts automatically. Allow camera access if prompted.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">🌐</span><span>Does it work across different networks?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Yes. Yunze uses WebRTC with PeerJS relay, which handles NAT and firewalls automatically. Works between WiFi and 4G/5G, or across different countries — as long as both devices have internet.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">📦</span><span>Is there a file size limit?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">No file size limit for P2P transfers. Large files are sent in chunks automatically. Speed depends on the slower of the two internet connections, not our servers.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">🔒</span><span>Are my files stored on your servers?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">No. Files transfer directly between devices (peer-to-peer) and are never stored on Yunze servers. The optional Upload & Get Link feature lets you choose gofile.io or Telegram for one-way sharing.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">⚠️</span><span>Connection failed — what do I do?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">1) Check both devices have internet. 2) Refresh and create a new room. 3) Disable VPN if active. 4) Try Chrome or Edge. 5) Some corporate/school networks block WebRTC — try mobile data.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">🐢</span><span>Transfer is slow — how to speed it up?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Speed depends on the slower connection. Try: move closer to your router, switch to WiFi from 4G, close other bandwidth-heavy apps, or compress large files into a .zip before sending.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">⚙️</span><span>What is the PeerJS server error?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">It means the relay server is temporarily unreachable. Wait a few seconds and refresh the page. If it continues, try a different network (WiFi ↔ mobile data).</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">📱</span><span>Which devices and browsers are supported?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Any device with a modern browser — Android, iPhone, Windows, Mac, Linux. Recommended: Chrome, Edge, Firefox, Safari (iOS 15.4+). Camera permission required for QR scanning.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">💬</span><span>Can I send messages without files?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Yes. Once connected, type messages in the chat bar and send freely. Messages are also peer-to-peer and not stored anywhere.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">🔗</span><span>What is Upload & Get Link?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">An alternative for when both devices can't be online simultaneously. Choose gofile.io (public link, ~10-day retention) or Telegram (files up to 50MB, stored in our channel) and get a shareable download link.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">📲</span><span>Can I install it as an app?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Yes! It's a PWA. On Android: browser menu → Add to Home Screen. On iOS Safari: Share button → Add to Home Screen. Works like a native app.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">👥</span><span>How many people can connect at once?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Currently one-to-one (2 devices per room). You become the host, the other person is the guest.</div>
+                </div>
+                <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
+                    <div class="faq-q">
+                        <div class="faq-q-row"><span class="faq-q-icon">💰</span><span>Is it free?</span></div>
+                        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-a">Yes, completely free. No signup, no subscription, no fees.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Help Nav Button -->
+<button onclick="toggleHelpView()" id="helpNavBtn" style="position:fixed;top:18px;right:18px;z-index:999;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:50px;padding:10px 18px;color:rgba(255,255,255,0.8);font-size:0.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.2s;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Help
+</button>
+
+<!-- Footer -->
+<footer style="text-align:center;padding:40px 20px 30px;margin-top:20px;border-top:1px solid rgba(255,255,255,0.06);">
+    <div style="font-size:1.4rem;font-weight:800;background:linear-gradient(45deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-1px;margin-bottom:8px;">⚡ YUNZE</div>
+    <div style="color:rgba(255,255,255,0.35);font-size:0.8rem;letter-spacing:1px;margin-bottom:14px;">UNIVERSAL FILE TRANSFER</div>
+    <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:16px;">
+        <span class="text-dim">🌐 Cross-Network P2P</span>
+        <span class="text-dim">🔒 WebRTC Encrypted</span>
+        <span class="text-dim">📁 No Size Limit</span>
+        <span class="text-dim">🚀 Zero Server Storage</span>
+    </div>
+    <div style="color:rgba(255,255,255,0.2);font-size:0.75rem;">Yunze© 2026 &mdash; Built with WebRTC &amp; PeerJS &mdash; Files are transferred directly between devices, never stored automatically</div>
+    <div style="margin-top:10px;display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;">
+        <a href="https://www.instagram.com/yunze_official" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.35);font-size:0.78rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='rgba(225,48,108,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @yunze_official
+        </a>
+        <a href="https://ko-fi.com/yunzeofficial" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,216,77,0.12);border:1px solid rgba(255,216,77,0.25);color:rgba(255,216,77,0.75);font-size:0.78rem;font-weight:600;text-decoration:none;padding:6px 14px;border-radius:20px;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,216,77,0.22)';this.style.color='rgba(255,216,77,1)';this.style.borderColor='rgba(255,216,77,0.5)'" onmouseout="this.style.background='rgba(255,216,77,0.12)';this.style.color='rgba(255,216,77,0.75)';this.style.borderColor='rgba(255,216,77,0.25)'">
+            &#9749; Support on Ko-fi
+        </a>
+    </div>
+    <div style="margin-top:18px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+        <a href="about.html" class="text-faint-link">About Yunze</a>
+        <a href="privacy.html" class="text-faint-link">Privacy Policy</a>
+        <a href="p2p.html" class="text-faint-link">What is P2P?</a>
+        <a href="security.html" class="text-faint-link">Secure Transfer Guide</a>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.2/peerjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+</html>

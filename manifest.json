@@ -1,0 +1,27 @@
+{
+  "name": "Yunze Universal Transfer",
+  "short_name": "Yunze",
+  "description": "Secure cross-network P2P file transfer — no server storage",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f0c29",
+  "theme_color": "#00d2ff",
+  "lang": "en",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "yunze-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "yunze-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

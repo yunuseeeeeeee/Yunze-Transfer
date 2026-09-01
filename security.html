@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure File Transfer: A Complete Guide | Yunze</title>
+    <meta name="description" content="Best practices for keeping your files safe when sharing them across the internet, including encryption, threat models, and common mistakes to avoid.">
+    <link rel="canonical" href="https://yunzetransfer.pages.dev/security.html">
+    <meta property="og:site_name" content="Yunze Universal Transfer">
+    <meta property="og:title" content="Secure File Transfer: A Complete Guide">
+    <meta property="og:description" content="Best practices for keeping your files safe when sharing them across the internet, including encryption, threat models, and common mistakes to avoid.">
+    <meta property="og:url" content="https://yunzetransfer.pages.dev/security.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yunzetransfer.pages.dev/yunze-icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Secure File Transfer: A Complete Guide">
+    <meta name="twitter:description" content="Best practices for keeping your files safe when sharing them across the internet, including encryption, threat models, and common mistakes to avoid.">
+    <meta name="twitter:image" content="https://yunzetransfer.pages.dev/yunze-icon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="yunze-icon.png">
+    <link rel="apple-touch-icon" href="yunze-icon.png">
+    <meta name="theme-color" content="#00d2ff">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background:#0a0e1a; margin:0; }
+        .content-page { position:static; display:block; }
+    </style>
+</head>
+<body>
+
+<div id="pageSecurity" class="content-page open">
+    <div class="content-inner">
+        <a href="index.html" class="content-back" style="text-decoration:none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back to Yunze
+        </a>
+        <h1>Secure File Transfer: A Complete Guide</h1>
+        <p class="subtitle">Best practices for keeping your files safe when sharing them across the internet — whether you use Yunze or any other service.</p>
+
+        <h2>Why File Transfer Security Matters</h2>
+        <p>Every time you share a file digitally, you're making decisions that have security implications. Who can access the file in transit? Where is it stored? Who can see it? How long does it persist? Most people share files without thinking about these questions — and most file sharing services are designed to keep you from thinking about them.</p>
+        <p>This guide breaks down the key security concepts behind file transfer so you can make informed decisions about how you share sensitive information.</p>
+
+        <h2>Encryption in Transit</h2>
+        <p>The most fundamental security requirement for any file transfer is encryption in transit — ensuring that if someone intercepts your data while it's traveling across the internet, they can't read it. There are two main approaches:</p>
+        <p><strong>TLS/HTTPS encryption:</strong> Most cloud services (Dropbox, Google Drive, WeTransfer) use TLS to encrypt the connection between your device and their servers. This protects your file from network eavesdroppers, but the service provider still receives and can access your unencrypted file.</p>
+        <p><strong>End-to-end encryption (E2EE):</strong> With E2EE, the file is encrypted on your device before it leaves, and only the intended recipient can decrypt it. Even the service provider cannot access the file. Yunze's WebRTC data channels use DTLS, which provides strong encryption that even the signaling server cannot read.</p>
+
+        <div class="content-highlight">
+            <p>🛡️ <strong>Yunze uses WebRTC DTLS encryption</strong> — your files are encrypted between your device and the recipient's device. No intermediary can read them.</p>
+        </div>
+
+        <h2>Encryption at Rest</h2>
+        <p>Encryption at rest refers to how files are stored. Cloud services that store your files should encrypt them on their servers — but "encrypted at rest" doesn't mean the service can't read them. It just means someone who steals their hard drives can't. The service provider still holds the encryption keys.</p>
+        <p>Yunze avoids this problem entirely: your files are never stored on our servers. There's nothing to encrypt at rest because there's nothing at rest.</p>
+
+        <h2>Best Practices for Sharing Sensitive Files</h2>
+        <p><strong>1. Use end-to-end encrypted transfer methods</strong><br>
+        For truly sensitive files (legal documents, financial records, medical information), use services that offer genuine end-to-end encryption. P2P tools like Yunze are excellent for this because files never touch a server.</p>
+
+        <p><strong>2. Encrypt the file itself before sharing</strong><br>
+        For an extra layer of protection, encrypt a file before sending it — even through an already-encrypted channel. Tools like 7-Zip allow you to create password-protected archives. Share the password through a different channel (phone call, in-person).</p>
+
+        <p><strong>3. Verify the recipient</strong><br>
+        Before sharing sensitive files, confirm you're communicating with the right person. In Yunze, room codes are short-lived and session-based — they expire when the connection closes. Always share room codes through a trusted channel.</p>
+
+        <p><strong>4. Use a secure network</strong><br>
+        Avoid sharing sensitive files over public WiFi networks without additional protection. While Yunze's WebRTC connections are encrypted, other traffic on your device may not be. Consider using a VPN on public networks.</p>
+
+        <p><strong>5. Be careful with cloud-based fallbacks</strong><br>
+        When using Yunze's "Cloud Share" feature, your file is uploaded to a third-party service. This is convenient but doesn't have the same privacy guarantees as a direct P2P transfer. Use this feature only for non-sensitive files.</p>
+
+        <h2>Common File Transfer Security Mistakes</h2>
+        <ul>
+            <li><strong>Sharing via email attachments</strong> — Email is not encrypted by default. Attachments can be read by email providers, corporate IT, and anyone who intercepts the message.</li>
+            <li><strong>Using public upload services without expiry</strong> — Files uploaded to services like Imgur or anonymous file hosts may remain publicly accessible indefinitely.</li>
+            <li><strong>Reusing room codes or links</strong> — Old links or codes can be accessed by unintended parties. Always create a fresh session for each transfer.</li>
+            <li><strong>Ignoring file metadata</strong> — Documents like PDFs and Word files can contain metadata (author name, editing history, GPS coordinates in photos). Consider stripping metadata from sensitive files before sharing.</li>
+        </ul>
+
+        <h2>Understanding Your Threat Model</h2>
+        <p>Security is always a trade-off. The right level of security depends on what you're protecting and who you're protecting it from. A casual user sharing vacation photos has very different needs than a journalist sharing sensitive sources.</p>
+        <p>For most everyday file transfers, a service like Yunze provides excellent security: direct P2P, encrypted connection, no server storage. For very high-risk scenarios, consider additional measures: file-level encryption, air-gapped devices, or specialized secure communication tools.</p>
+
+        <h2>Why We Built Yunze</h2>
+        <p>Yunze was built because we believe privacy-respecting file transfer should be accessible to everyone — not just people with technical expertise. By building on WebRTC and keeping the interface simple, we've made it possible for anyone to share files with strong security guarantees, no account required, and no file size limits. We believe the future of file sharing is direct, private, and user-controlled.</p>
+    </div>
+</div>
+
+</body>
+</html>
