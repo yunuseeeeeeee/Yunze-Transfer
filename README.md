@@ -130,7 +130,6 @@ The signaling server is only involved in the initial handshake. All file data fl
 ├── manifest.json                  # PWA manifest (name, icons, theme color)
 ├── favicon.ico / yunze-icon.png    # App icons
 ├── _redirects                       # SPA fallback routing rule
-├── netlify.toml                      # Legacy Netlify config (kept for reference)
 ├── LICENSE                             # BSD 3-Clause License (+ trademark notice)
 └── README.md                            # This file
 ```
