@@ -5,7 +5,7 @@
 
   **Free, private, peer-to-peer file sharing — no accounts, no servers, no size limits.**
 
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+  [![License: BSD 3-Clause](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg)](LICENSE)
   [![Live Site](https://img.shields.io/badge/Live-yunzetransfer.pages.dev-blue)](https://yunzetransfer.pages.dev)
 
   🔗 **Live app:** [yunzetransfer.pages.dev](https://yunzetransfer.pages.dev)
@@ -132,7 +132,7 @@ The signaling server is only involved in the initial handshake. All file data fl
 ├── favicon.ico / yunze-icon.png    # App icons
 ├── _redirects                       # SPA fallback routing rule
 ├── netlify.toml                      # Legacy Netlify config (kept for reference)
-├── LICENSE                             # MIT License
+├── LICENSE                             # BSD 3-Clause License (+ trademark notice)
 └── README.md                            # This file
 ```
 
@@ -227,7 +227,18 @@ Contributions, bug reports, and feature suggestions are welcome. Feel free to op
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE) — you're free to use, modify, and distribute it, provided the original copyright notice is retained.
+This project is licensed under the **[BSD 3-Clause License](LICENSE)**.
+
+In short:
+- ✅ You are free to **use, copy, modify, and redistribute** this code, including for commercial purposes.
+- ✅ You must **keep the original copyright notice** in any copy or substantial portion of the code.
+- ❌ You may **not use the "Yunze" name, logo, or branding** to promote a modified/derivative version, or present a fork as the original "Yunze Universal Transfer" project, without explicit written permission.
+
+This means the **code itself is fully open** — but the **Yunze name and identity are protected**. If you fork this project, you're welcome to build on it, but please rebrand it under your own name.
+
+## Trademark
+
+"Yunze" and the Yunze logo are the identity of this project and are **not covered by the code license above**. Republishing this project (as-is or modified) under the Yunze name, or claiming authorship of the original project, is not permitted. If you build something based on this code, please give it its own name and branding.
 
 ## Contact
 
