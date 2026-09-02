@@ -1,5 +1,0 @@
-[[headers]]
-  for = "/sitemap.xml"
-  [headers.values]
-    Content-Type = "application/xml; charset=UTF-8"
-
