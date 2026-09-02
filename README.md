@@ -28,7 +28,6 @@
 - [Deployment](#deployment)
 - [Security & Privacy](#security--privacy)
 - [SEO / Static Pages](#seo--static-pages)
-- [Android App](#android-app)
 - [Browser Compatibility](#browser-compatibility)
 - [Roadmap](#roadmap)
 - [FAQ](#faq)
@@ -183,10 +182,6 @@ Full details: [Privacy Policy](https://yunzetransfer.pages.dev/privacy.html) · 
 ## SEO / Static Pages
 
 Because the core app is a single-page application, secondary content (About, Privacy, P2P Guide, Security Guide) is built as **separate standalone HTML files** rather than JavaScript-only overlays. Each page has its own `<title>`, meta description, canonical URL, and Open Graph tags, so search engines can crawl and index them independently — not just the main app screen.
-
-## Android App
-
-A packaged Android APK (built via a WebView wrapper) is available under [**Releases**](../../releases). It loads the live web app inside a native Android shell.
 
 ## Browser Compatibility
 
