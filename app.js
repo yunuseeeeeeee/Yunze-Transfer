@@ -896,11 +896,6 @@ function _wireConn(conn, connectTimeout) {
 // Cloud share
 let _csFile = null;
 let _csLink = null;
-let _csService = 'gofile';
-
-const TG_BOT_TOKEN = '8674648038:AAFdVxqDlz7eSYVah9mcKNsncp8R9fNdkfA';
-const TG_CHAT_ID = '-1004364593569';
-const TG_MAX_SIZE = 50 * 1024 * 1024; // Telegram Bot API hard limit
 
 function switchCloudTab(tab) {
     document.getElementById('csTabUpload').classList.toggle('active', tab === 'upload');
@@ -909,48 +904,6 @@ function switchCloudTab(tab) {
     document.getElementById('csPanelDownload').style.display = tab === 'download' ? 'block' : 'none';
 }
 
-function switchCsService(service) {
-    _csService = service;
-    const gofileBtn = document.getElementById('csSvcGofile');
-    const tgBtn = document.getElementById('csSvcTelegram');
-    const hint = document.getElementById('csDropHint');
-    const uploadBtn = document.getElementById('csUploadBtn');
-
-    const activeStyle = { border: 'rgba(150,100,255,0.5)', bg: 'rgba(150,100,255,0.22)', color: 'rgba(200,170,255,0.95)' };
-    const inactiveStyle = { border: 'rgba(255,255,255,0.12)', bg: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.5)' };
-
-    const gStyle = service === 'gofile' ? activeStyle : inactiveStyle;
-    const tStyle = service === 'telegram' ? activeStyle : inactiveStyle;
-    gofileBtn.style.borderColor = gStyle.border; gofileBtn.style.background = gStyle.bg; gofileBtn.style.color = gStyle.color;
-    tgBtn.style.borderColor = tStyle.border; tgBtn.style.background = tStyle.bg; tgBtn.style.color = tStyle.color;
-
-    if (hint) {
-        hint.textContent = service === 'telegram'
-            ? 'Any file type · Max 50MB · Uploaded to Telegram'
-            : 'Any file type · Uploaded to gofile.io';
-    }
-    if (uploadBtn && !uploadBtn.disabled) {
-        uploadBtn.textContent = service === 'telegram' ? '📨 Upload & Get Link' : '☁️ Upload & Get Link';
-    }
-    document.getElementById('csLinkResult').style.display = 'none';
-}
-
-async function uploadToTelegram(blob, filename) {
-    if (blob.size > TG_MAX_SIZE) {
-        throw new Error("File exceeds Telegram's 50MB limit. Use gofile.io instead.");
-    }
-    const fd = new FormData();
-    fd.append('chat_id', TG_CHAT_ID);
-    fd.append('document', blob, filename);
-    const r = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendDocument`, { method: 'POST', body: fd });
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.description || 'Telegram upload failed');
-    const fileId = j.result.document.file_id;
-    const fRes = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/getFile?file_id=${fileId}`);
-    const fJson = await fRes.json();
-    if (!fJson.ok) throw new Error(fJson.description || 'Could not resolve file path');
-    return `https://api.telegram.org/file/bot${TG_BOT_TOKEN}/${fJson.result.file_path}`;
-}
 
 function csHandleFile(file) {
     if (!file) return;
@@ -988,44 +941,33 @@ async function csUpload() {
     btn.textContent = '⏳ Uploading...';
     progress.style.display = 'block';
     progressBar.style.width = '10%';
-
+    progressText.textContent = 'Connecting to gofile.io...';
     try {
-        let link, ttlText;
-        if (_csService === 'telegram') {
-            progressText.textContent = 'Sending to Telegram...';
-            progressBar.style.width = '35%';
-            link = await uploadToTelegram(_csFile, _csFile.name);
-            ttlText = '📨 Stored on Telegram · permanent unless removed from the channel';
-        } else {
-            progressText.textContent = 'Connecting to gofile.io...';
-            const srvRes = await fetch('https://api.gofile.io/servers');
-            const srvData = await srvRes.json();
-            const server = srvData.data.servers[0].name;
-            progressBar.style.width = '30%';
-            progressText.textContent = 'Uploading...';
-            const fd = new FormData();
-            fd.append('file', _csFile);
-            const r = await fetch(`https://${server}.gofile.io/uploadFile`, { method: 'POST', body: fd });
-            const d = await r.json();
-            if (d.status !== 'ok') throw new Error('Upload failed');
-            link = d.data.downloadPage;
-            ttlText = '⏳ Link valid for ~10 days of inactivity (gofile.io)';
-        }
+        const srvRes = await fetch('https://api.gofile.io/servers');
+        const srvData = await srvRes.json();
+        const server = srvData.data.servers[0].name;
+        progressBar.style.width = '30%';
+        progressText.textContent = 'Uploading...';
+        const fd = new FormData();
+        fd.append('file', _csFile);
+        const r = await fetch(`https://${server}.gofile.io/uploadFile`, { method: 'POST', body: fd });
+        const d = await r.json();
+        if (d.status !== 'ok') throw new Error('Upload failed');
         progressBar.style.width = '100%';
         progressText.textContent = 'Done!';
-        _csLink = link;
+        _csLink = d.data.downloadPage;
         const result = document.getElementById('csLinkResult');
         result.style.display = 'block';
         const linkEl = document.getElementById('csResultLink');
         linkEl.href = _csLink;
         linkEl.textContent = _csLink;
-        document.getElementById('csLinkTtl').textContent = ttlText;
+        document.getElementById('csLinkTtl').textContent = '⏳ Link valid for ~10 days of inactivity (gofile.io)';
         btn.textContent = '✅ Uploaded';
         setTimeout(() => { progress.style.display = 'none'; }, 1500);
     } catch(e) {
         progressText.textContent = '❌ Upload failed: ' + e.message;
         btn.disabled = false;
-        btn.textContent = _csService === 'telegram' ? '📨 Upload & Get Link' : '☁️ Upload & Get Link';
+        btn.textContent = '☁️ Upload & Get Link';
     }
 }
 
@@ -1043,7 +985,7 @@ function csCopyLink() {
 function csCheckLink() {
     const val = document.getElementById('csLinkInput').value.trim();
     const btn = document.getElementById('csDownloadBtn');
-    const valid = val.includes('gofile.io') || val.includes('api.telegram.org/file/');
+    const valid = val.includes('gofile.io');
     btn.disabled = !valid;
     btn.style.color = valid ? 'rgba(200,170,255,0.95)' : 'rgba(200,170,255,0.6)';
     btn.style.cursor = valid ? 'pointer' : 'not-allowed';
@@ -1051,7 +993,7 @@ function csCheckLink() {
 
 function csDownload() {
     const val = document.getElementById('csLinkInput').value.trim();
-    if (val.includes('gofile.io') || val.includes('api.telegram.org/file/')) window.open(val, '_blank');
+    if (val.includes('gofile.io')) window.open(val, '_blank');
 }
 
 function resetApp() {
@@ -1636,8 +1578,8 @@ const FAQ = [
     a: "Make sure you've granted the browser camera permission. We recommend using Safari on iOS. Chrome works on Android. After granting camera permission, reopen the Scan QR tab."
   },
   {
-    q: "What is Cloud Share for?",
-    a: "When a P2P connection can't be established, you can instead upload your file to gofile.io or Telegram and get a download link. Choose your preferred service on the Cloud Share screen."
+    q: "What is file sharing via Gofile for?",
+    a: "When a P2P connection can't be established, you can instead upload your file to Gofile.io and get a download link. This option is suggested automatically on the transfer screen."
   },
   {
     q: "Is the app free?",

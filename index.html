@@ -130,7 +130,7 @@
             <div class="info-card"><h4>🌐 Cross-Network</h4><p>Works across WiFi, 4G/5G, different countries. PeerJS relay handles NAT & firewalls automatically.</p></div>
             <div class="info-card"><h4>🔐 Direct P2P</h4><p>Once connected, data flows directly between devices — no server ever touches your files unless you request a share link.</p></div>
             <div class="info-card"><h4>📷 Instant QR Connect</h4><p>Host shows QR, guest scans it — connection established automatically.</p></div>
-            <div class="info-card"><h4>🔗 File to Link</h4><p>Convert received files into shareable public download links (via gofile.io or Telegram).</p></div>
+            <div class="info-card"><h4>🔗 File to Link</h4><p>Convert received files into shareable public download links (via gofile.io).</p></div>
         </div>
     </div>
 
@@ -150,14 +150,10 @@
 
             <!-- UPLOAD PANEL -->
             <div id="csPanelUpload">
-                <div style="display:flex;gap:8px;margin-bottom:14px;">
-                    <button id="csSvcGofile" onclick="switchCsService('gofile')" style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(150,100,255,0.5);background:rgba(150,100,255,0.22);color:rgba(200,170,255,0.95);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;">☁️ gofile.io</button>
-                    <button id="csSvcTelegram" onclick="switchCsService('telegram')" style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;">📨 Telegram</button>
-                </div>
                 <div id="csDropZone" onclick="document.getElementById('csFileInput').click()" style="border:2px dashed rgba(150,100,255,0.35);border-radius:14px;padding:32px 20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:14px;" onmouseover="this.style.borderColor='rgba(150,100,255,0.7)';this.style.background='rgba(150,100,255,0.07)'" onmouseout="this.style.borderColor='rgba(150,100,255,0.35)';this.style.background='transparent'">
                     <div style="font-size:2rem;margin-bottom:8px;">📁</div>
                     <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:600;">Tap to select file</div>
-                    <div id="csDropHint" style="color:rgba(255,255,255,0.35);font-size:0.75rem;margin-top:4px;">Any file type · Uploaded to gofile.io</div>
+                    <div style="color:rgba(255,255,255,0.35);font-size:0.75rem;margin-top:4px;">Any file type · Uploaded to gofile.io</div>
                 </div>
                 <input type="file" id="csFileInput" class="hidden" onchange="csHandleFile(this.files[0])">
 
@@ -192,8 +188,8 @@
             <!-- DOWNLOAD PANEL -->
             <div id="csPanelDownload" class="hidden">
                 <div class="input-group">
-                    <label>Paste gofile.io or Telegram link</label>
-                    <input type="url" id="csLinkInput" placeholder="https://gofile.io/d/... or https://api.telegram.org/file/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#fff;font-size:0.9rem;box-sizing:border-box;" oninput="csCheckLink()">
+                    <label>Paste gofile.io link</label>
+                    <input type="url" id="csLinkInput" placeholder="https://gofile.io/d/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#fff;font-size:0.9rem;box-sizing:border-box;" oninput="csCheckLink()">
                 </div>
                 <button id="csDownloadBtn" onclick="csDownload()" disabled style="width:100%;padding:13px;background:linear-gradient(135deg,rgba(150,100,255,0.3),rgba(100,150,255,0.3));border:1px solid rgba(150,100,255,0.4);color:rgba(200,170,255,0.6);border-radius:14px;cursor:not-allowed;font-size:0.95rem;font-weight:600;transition:all 0.2s;margin-top:10px;">📥 Open Download Page</button>
                 <div style="margin-top:10px;font-size:0.73rem;color:rgba(255,255,255,0.3);text-align:center;">Opens the download link in a new tab</div>
@@ -410,7 +406,7 @@
                         <div class="faq-q-row"><span class="faq-q-icon">🔒</span><span>Are my files stored on your servers?</span></div>
                         <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                     </div>
-                    <div class="faq-a">No. Files transfer directly between devices (peer-to-peer) and are never stored on Yunze servers. The optional Upload & Get Link feature lets you choose gofile.io or Telegram for one-way sharing.</div>
+                    <div class="faq-a">No. Files transfer directly between devices (peer-to-peer) and are never stored on Yunze servers. The optional Upload & Get Link feature uses gofile.io for one-way sharing.</div>
                 </div>
                 <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
                     <div class="faq-q">
@@ -452,7 +448,7 @@
                         <div class="faq-q-row"><span class="faq-q-icon">🔗</span><span>What is Upload & Get Link?</span></div>
                         <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                     </div>
-                    <div class="faq-a">An alternative for when both devices can't be online simultaneously. Choose gofile.io (public link, ~10-day retention) or Telegram (files up to 50MB, stored in our channel) and get a shareable download link.</div>
+                    <div class="faq-a">An alternative for when both devices can't be online simultaneously. Your file is uploaded to gofile.io and you get a shareable download link. Note: gofile.io may delete files after inactivity.</div>
                 </div>
                 <div class="faq-item" onclick="var a=this.querySelector('.faq-a');var c=this.querySelector('.faq-chevron');var o=a.style.display==='block';a.style.display=o?'none':'block';c.style.transform=o?'':'rotate(180deg)';this.style.borderColor=o?'rgba(255,255,255,0.08)':'rgba(0,210,255,0.3)';">
                     <div class="faq-q">
