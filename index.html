@@ -359,114 +359,131 @@
     </div>
 
     <!-- HELP VIEW -->
-    <div id="viewHelp" class="view">
-        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:32px 24px;margin:20px 0;">
-            <div style="margin-bottom:24px;">
-                <h2 style="font-size:1.3rem;font-weight:800;color:white;margin:0;">❓ Help &amp; FAQ</h2>
-                <p style="color:rgba(255,255,255,0.45);font-size:0.82rem;margin:4px 0 0;">Frequently asked questions &amp; troubleshooting</p>
+<div id="helpModal" style="display:none;position:fixed;inset:0;z-index:9998;background:#0f0c29;overflow-y:auto;padding:80px 16px 40px;">
+    <div style="max-width:1100px;margin:0 auto;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:32px 24px;">
+        <div style="margin-bottom:24px;">
+            <h2 style="font-size:1.3rem;font-weight:800;color:white;margin:0;">❓ Help &amp; FAQ</h2>
+            <p style="color:rgba(255,255,255,0.45);font-size:0.82rem;margin:4px 0 0;">Frequently asked questions &amp; troubleshooting</p>
+        </div>
+        <div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">🚀</span><span>How do I send a file?</span>
+                </div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Tap <strong>Create Room</strong> on the home screen. Share the 5-character room code or QR code with the other person. Once they join, tap the 📎 button in chat, select your file, and hit send.</div>
             </div>
-            <div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">🚀</span><span>How do I send a file?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Tap <strong>Create Room</strong> on the home screen. Share the 5-character room code or QR code with the other person. Once they join, tap the 📎 button in chat, select your file, and hit send.</div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">📥</span><span>How do I receive a file?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">📥</span><span>How do I receive a file?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Get the 5-character room code from the sender. Type it in the <strong>Enter Code</strong> tab and tap Join — or scan their QR code with the <strong>Scan QR</strong> tab.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Get the 5-character room code from the sender. Type it in the <strong>Enter Code</strong> tab and tap Join — or scan their QR code with the <strong>Scan QR</strong> tab.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">📷</span><span>How does QR code scanning work?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">📷</span><span>How does QR code scanning work?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">The host taps Create Room — a QR code appears. The guest goes to <strong>Scan QR</strong> and points their camera at it. Connection starts automatically. Allow camera access if prompted.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">The host taps Create Room — a QR code appears. The guest goes to <strong>Scan QR</strong> and points their camera at it. Connection starts automatically. Allow camera access if prompted.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">🌐</span><span>Does it work across different networks?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">🌐</span><span>Does it work across different networks?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Yes. Yunze uses WebRTC with PeerJS relay, which handles NAT and firewalls automatically. Works between WiFi and 4G/5G, or across different countries — as long as both devices have internet.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Yes. Yunze uses WebRTC with PeerJS relay, which handles NAT and firewalls automatically. Works between WiFi and 4G/5G, or across different countries — as long as both devices have internet.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">📦</span><span>Is there a file size limit?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">📦</span><span>Is there a file size limit?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">No file size limit for P2P transfers. Large files are sent in chunks automatically. Speed depends on the slower of the two internet connections, not our servers.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">No file size limit for P2P transfers. Large files are sent in chunks automatically. Speed depends on the slower of the two internet connections, not our servers.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">🔒</span><span>Are my files stored on your servers?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">🔒</span><span>Are my files stored on your servers?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">No. Files transfer directly between devices (peer-to-peer) and are never stored on Yunze servers. The optional Upload & Get Link feature uses gofile.io for one-way sharing.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">No. Files transfer directly between devices (peer-to-peer) and are never stored on Yunze servers. The optional Upload & Get Link feature uses gofile.io for one-way sharing.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">⚠️</span><span>Connection failed — what do I do?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">⚠️</span><span>Connection failed — what do I do?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">1) Check both devices have internet. 2) Refresh and create a new room. 3) Disable VPN if active. 4) Try Chrome or Edge. 5) Some corporate/school networks block WebRTC — try mobile data.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">1) Check both devices have internet. 2) Refresh and create a new room. 3) Disable VPN if active. 4) Try Chrome or Edge. 5) Some corporate/school networks block WebRTC — try mobile data.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">🐢</span><span>Transfer is slow — how to speed it up?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">🐢</span><span>Transfer is slow — how to speed it up?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Speed depends on the slower connection. Try: move closer to your router, switch to WiFi from 4G, close other bandwidth-heavy apps, or compress large files into a .zip before sending.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Speed depends on the slower connection. Try: move closer to your router, switch to WiFi from 4G, close other bandwidth-heavy apps, or compress large files into a .zip before sending.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">⚙️</span><span>What is the PeerJS server error?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">⚙️</span><span>What is the PeerJS server error?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">It means the relay server is temporarily unreachable. Wait a few seconds and refresh the page. If it continues, try a different network (WiFi ↔ mobile data).</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">It means the relay server is temporarily unreachable. Wait a few seconds and refresh the page. If it continues, try a different network (WiFi ↔ mobile data).</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">📱</span><span>Which devices and browsers are supported?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">📱</span><span>Which devices and browsers are supported?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Any device with a modern browser — Android, iPhone, Windows, Mac, Linux. Recommended: Chrome, Edge, Firefox, Safari (iOS 15.4+). Camera permission required for QR scanning.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Any device with a modern browser — Android, iPhone, Windows, Mac, Linux. Recommended: Chrome, Edge, Firefox, Safari (iOS 15.4+). Camera permission required for QR scanning.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">💬</span><span>Can I send messages without files?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">💬</span><span>Can I send messages without files?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Yes. Once connected, type messages in the chat bar and send freely. Messages are also peer-to-peer and not stored anywhere.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Yes. Once connected, type messages in the chat bar and send freely. Messages are also peer-to-peer and not stored anywhere.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">🔗</span><span>What is Upload & Get Link?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">🔗</span><span>What is Upload & Get Link?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">An alternative for when both devices can't be online simultaneously. Your file is uploaded to gofile.io and you get a shareable download link. Note: gofile.io may delete files after inactivity.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">An alternative for when both devices can't be online simultaneously. Your file is uploaded to gofile.io and you get a shareable download link. Note: gofile.io may delete files after inactivity.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">📲</span><span>Can I install it as an app?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">📲</span><span>Can I install it as an app?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Yes! It's a PWA. On Android: browser menu → Add to Home Screen. On iOS Safari: Share button → Add to Home Screen. Works like a native app.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Yes! It's a PWA. On Android: browser menu → Add to Home Screen. On iOS Safari: Share button → Add to Home Screen. Works like a native app.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">👥</span><span>How many people can connect at once?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">👥</span><span>How many people can connect at once?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Currently one-to-one (2 devices per room). You become the host, the other person is the guest.</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Currently one-to-one (2 devices per room). You become the host, the other person is the guest.</div>
+            </div>
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;background:rgba(255,255,255,0.03);">
+                <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
+                    <span style="font-size:1.1rem;">💰</span><span>Is it free?</span>
                 </div>
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;padding:14px 18px;">
-                    <div style="display:flex;align-items:center;gap:10px;color:white;font-size:0.92rem;font-weight:600;margin-bottom:8px;">
-                        <span style="font-size:1.1rem;">💰</span><span>Is it free?</span>
-                    </div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Yes, completely free. No signup, no subscription, no fees.</div>
-                </div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.87rem;line-height:1.6;padding-left:30px;">Yes, completely free. No signup, no subscription, no fees.</div>
             </div>
         </div>
     </div>
+</div>
+
 
 </div>
 
 <!-- Help Nav Button -->
-<button onclick="toggleHelpView()" id="helpNavBtn" style="position:fixed;top:18px;right:18px;z-index:999;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:50px;padding:10px 18px;color:rgba(255,255,255,0.8);font-size:0.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.2s;">
+<button onclick="toggleHelpModal()" id="helpNavBtn" style="position:fixed;top:18px;right:18px;z-index:9999;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:50px;padding:10px 18px;color:rgba(255,255,255,0.8);font-size:0.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.2s;">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     Help
 </button>
+<script>
+function toggleHelpModal() {
+    const modal = document.getElementById('helpModal');
+    const btn = document.getElementById('helpNavBtn');
+    const isOpen = modal.style.display === 'block';
+    if (isOpen) {
+        modal.style.display = 'none';
+        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Help';
+        btn.style.background = 'rgba(255,255,255,0.08)';
+    } else {
+        modal.style.display = 'block';
+        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back';
+        btn.style.background = 'rgba(0,210,255,0.15)';
+    }
+}
+</script>
 
 <!-- Footer -->
 <footer style="text-align:center;padding:40px 20px 30px;margin-top:20px;border-top:1px solid rgba(255,255,255,0.06);">

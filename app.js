@@ -1603,22 +1603,6 @@ const FAQ = [
   }
 ];
 
-let helpOpen = false;
-
-function toggleHelpView() {
-    const btn = document.getElementById('helpNavBtn');
-    if (helpOpen) {
-        showView('Home');
-        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Help`;
-        btn.style.background = 'rgba(255,255,255,0.08)';
-        helpOpen = false;
-    } else {
-        showView('Help');
-        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back`;
-        btn.style.background = 'rgba(0,210,255,0.15)';
-        helpOpen = true;
-    }
-}
 
 function renderFAQ() {
     const list = document.getElementById('faqList');
