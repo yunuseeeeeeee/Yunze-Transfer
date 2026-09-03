@@ -60,7 +60,7 @@ This means:
 - 🌍 **Cross-network support** — works across WiFi ↔ 4G/5G, and across different countries/ISPs
 - 🔑 **Simple pairing** — join with a 5-character room code, or scan a QR code
 - 📱 **Mobile-friendly UI** — fully responsive, works from any modern mobile or desktop browser
-- ☁️ **Cloud Share (optional fallback)** — when both devices can't be online simultaneously, upload the file via **gofile.io** or **Telegram** and share a plain download link instead
+- ☁️ **Cloud Share (optional fallback)** — when both devices can't be online simultaneously, upload the file via **gofile.io** and share a plain download link instead
 - 🛡️ **Privacy-first by design** — no accounts, no file logging, no analytics tracking file content
 - 📄 **In-chat file preview** — images and common file types render inline before download
 - 🌐 **SEO-friendly static pages** — About, Privacy Policy, P2P Guide, and Security Guide are real crawlable pages, not JS-only overlays
@@ -85,7 +85,6 @@ Sometimes both people can't be online at the exact same time. For this case, Yun
 | Provider | Limit | Retention | Notes |
 |----------|-------|-----------|-------|
 | **gofile.io** | No hard limit | ~10 days of inactivity | Public download link, third-party hosted |
-| **Telegram** | 50MB per file | Until removed from the storage channel | Uses the Telegram Bot API to store files and generate a direct file link |
 
 This mode is entirely opt-in — the default and recommended way to use Yunze is direct P2P transfer.
 
@@ -113,14 +112,14 @@ The signaling server is only involved in the initial handshake. All file data fl
 - **Frontend:** Vanilla JavaScript, HTML5, CSS3 — no framework, no build step, no bundler
 - **P2P layer:** [PeerJS](https://peerjs.com) (WebRTC wrapper + signaling)
 - **Hosting:** [Cloudflare Pages](https://pages.dev) (static hosting, global CDN)
-- **Optional cloud fallback:** [gofile.io](https://gofile.io) API, [Telegram Bot API](https://core.telegram.org/bots/api)
+- **Optional cloud fallback:** [gofile.io](https://gofile.io) API
 
 ## Project Structure
 
 ```
 ├── index.html            # Main single-page app (room creation, transfer UI, Cloud Share)
 ├── app.js                 # Core logic: WebRTC/PeerJS handling, file chunking,
-│                           #   Cloud Share uploads (gofile/Telegram), UI state
+│                           #   Cloud Share uploads (gofile.io), UI state
 ├── styles.css              # All styling, responsive breakpoints
 ├── about.html               # Standalone "About" page (SEO-crawlable)
 ├── privacy.html              # Standalone Privacy Policy page
@@ -174,7 +173,7 @@ To deploy your own fork:
 - **No server-side file storage** — by default, files never touch any server; they move directly between the two connected devices.
 - **Encryption in transit** — WebRTC DataChannels are encrypted using DTLS, the same class of encryption used to secure HTTPS.
 - **No accounts, no tracking** — Yunze does not require sign-up, does not use cookies, and does not log file names, sizes, or transfer metadata.
-- **Cloud Share caveat** — if you opt into gofile.io or Telegram upload, your file is stored on that third-party's infrastructure and is subject to their respective policies. This mode is clearly optional and separate from the default P2P mode.
+- **Cloud Share caveat** — if you opt into gofile.io upload, your file is stored on that third-party's infrastructure and is subject to their policies. This mode is clearly optional and separate from the default P2P mode.
 
 Full details: [Privacy Policy](https://yunzetransfer.pages.dev/privacy.html) · [Security Guide](https://yunzetransfer.pages.dev/security.html)
 
@@ -204,10 +203,10 @@ Yunze relies on the WebRTC API, which is supported in all modern browsers:
 ## FAQ
 
 **Are my files stored on your servers?**
-No. Files transfer directly between devices (peer-to-peer) and are never stored on Yunze servers. The optional "Upload & Get Link" feature lets you choose gofile.io or Telegram for one-way sharing — in that case, the file is stored by that third-party service, not by Yunze.
+No. Files transfer directly between devices (peer-to-peer) and are never stored on Yunze servers. The optional "Upload & Get Link" feature uses gofile.io for one-way sharing — in that case, the file is stored by gofile.io, not by Yunze.
 
 **Is there a file size limit?**
-No hard limit for direct P2P transfer — very large files may simply take longer depending on both devices' connection speeds. The optional Telegram Cloud Share mode has a 50MB cap (a limitation of the Telegram Bot API).
+No hard limit for direct P2P transfer — very large files may simply take longer depending on both devices' connection speeds.
 
 **Do both people need to be online at the same time?**
 For direct P2P transfer, yes. If that's not possible, use the Cloud Share fallback instead.
@@ -236,4 +235,4 @@ This means the **code itself is fully open** — but the **Yunze name and identi
 
 ## Contact
 
-For questions, feedback, or partnership inquiries, reach out via [Instagram @yunze_official](https://www.instagram.com/yunze_official).
+For questions, feedback, or partnership inquiries, reach out via [Instagram @yunze_official](https://www.instagram.com/yunze_official) or email [yunusemrecontact@proton.me](mailto:yunusemrecontact@proton.me).
