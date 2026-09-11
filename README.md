@@ -6,10 +6,10 @@
   **Free, private, peer-to-peer file sharing — no accounts, no servers, no size limits.**
 
   [![License: BSD 3-Clause](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg)](LICENSE)
-  [![Live Site](https://img.shields.io/badge/Live-yunzetransfer.pages.dev-blue)](https://yunzetransfer.pages.dev)
+  [![Live Site](https://img.shields.io/badge/Live-yunzetransfer.com-blue)](https://yunzetransfer.com)
   ![Version](https://img.shields.io/badge/version-1.1.0-brightgreen)
 
-  🔗 **Live app:** [yunzetransfer.pages.dev](https://yunzetransfer.pages.dev)
+  🔗 **Live app:** [yunzetransfer.com](https://yunzetransfer.com)
 </div>
 
 ---
@@ -291,7 +291,7 @@ This structure exists because Google/Bing cannot index content that only appears
 - **Signaling metadata only** — the PeerJS signaling server sees connection setup information (used to establish the WebRTC link) but never sees file contents.
 - **Cloud Share caveat** — opting into the gofile.io upload path means that specific file is stored on gofile's infrastructure, subject to their policies. This is presented as a clearly separate, opt-in mode.
 
-Full details: [Privacy Policy](https://yunzetransfer.pages.dev/privacy.html) · [Security Guide](https://yunzetransfer.pages.dev/security.html)
+Full details: [Privacy Policy](https://yunzetransfer.com/privacy.html) · [Security Guide](https://yunzetransfer.com/security.html)
 
 ## Known Limitations
 
