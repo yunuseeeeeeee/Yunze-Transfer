@@ -49,7 +49,7 @@
     <div class="header">
         <h1 class="logo">⚡ YUNZE</h1>
         <div class="tagline">Universal Secure File Transfer &mdash; Cross-Network P2P</div>
-        <div style="font-size: 10px; opacity: 0.6; margin-top: 5px;">v1.2.0</div>
+        <div style="font-size: 10px; opacity: 0.6; margin-top: 5px;">v1.1.0</div>
     </div>
 
     <!-- HOME VIEW -->
@@ -281,13 +281,8 @@
 
             <!-- Input Bar -->
             <div class="chat-input-wrap">
-                <div class="chat-input-row" style="position:relative;">
-                    <button class="chat-attach-btn" onclick="toggleAttachMenu()" id="attachMenuBtn" title="Attach file">📎</button>
-                    <div id="attachMenu" style="display:none;position:absolute;bottom:52px;left:0;background:#1a1830;border:1px solid rgba(255,255,255,0.12);border-radius:14px;overflow:hidden;z-index:100;min-width:150px;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-                        <button onclick="document.getElementById('galleryInput').click();closeAttachMenu();" style="display:flex;align-items:center;gap:10px;width:100%;padding:13px 16px;background:none;border:none;color:rgba(255,255,255,0.85);font-size:0.88rem;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.07);">🖼️ Gallery</button>
-                        <button onclick="document.getElementById('fileInput').click();closeAttachMenu();" style="display:flex;align-items:center;gap:10px;width:100%;padding:13px 16px;background:none;border:none;color:rgba(255,255,255,0.85);font-size:0.88rem;cursor:pointer;">📁 Files</button>
-                    </div>
-                    <input type="file" class="file-input" id="galleryInput" accept="image/*,video/*" multiple onchange="handleFiles(this.files)">
+                <div class="chat-input-row">
+                    <button class="chat-attach-btn" onclick="document.getElementById('fileInput').click()" title="Attach file">📎</button>
                     <input type="file" class="file-input" id="fileInput" multiple onchange="handleFiles(this.files)">
                     <textarea class="chat-text-input" id="chatTextInput" placeholder="Type a message..." rows="1" onkeydown="chatKeyDown(event)" oninput="autoResizeTextarea(this)"></textarea>
                     <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()" title="Send">
@@ -416,10 +411,10 @@ function toggleHelpModal() {
         </a>
     </div>
     <div style="margin-top:18px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
-        <a href="about.html" class="text-faint-link">About Yunze</a>
-        <a href="privacy.html" class="text-faint-link">Privacy Policy</a>
-        <a href="p2p.html" class="text-faint-link">What is P2P?</a>
-        <a href="security.html" class="text-faint-link">Secure Transfer Guide</a>
+        <span onclick="openPage('about')" class="text-faint-link">About Yunze</span>
+        <span onclick="openPage('privacy')" class="text-faint-link">Privacy Policy</span>
+        <span onclick="openPage('p2p')" class="text-faint-link">What is P2P?</span>
+        <span onclick="openPage('security')" class="text-faint-link">Secure Transfer Guide</span>
     </div>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);">
         <div style="color:rgba(255,255,255,0.25);font-size:0.72rem;letter-spacing:1px;margin-bottom:6px;">CONTACT</div>
@@ -534,5 +529,208 @@ function toggleHelpModal() {
         </div>
     </div>
 </div>
+
+
+<!-- CONTENT PAGES -->
+<div id="pageAbout" class="content-page">
+    <div class="content-inner">
+        <div class="content-back" onclick="closePage(this.closest('.content-page').id.replace('page','').toLowerCase())">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back
+        </div>
+        <h1>About Yunze Universal Transfer</h1>
+        <p class="subtitle">Free, private, peer-to-peer file sharing — no accounts, no servers, no limits.</p>
+
+        <h2>Our Mission</h2>
+        <p>Yunze Universal Transfer was built with a single goal: to make file sharing as simple and private as handing someone a USB drive — but from anywhere in the world. We believe that sharing files shouldn't require uploading your data to a corporation's servers, creating accounts, or worrying about file size caps.</p>
+        <p>Yunze was created and is maintained by the Yunze team as part of a growing suite of web-based productivity tools. Every product we build prioritizes simplicity, privacy, and accessibility.</p>
+
+        <h2>How It Works</h2>
+        <p>Yunze uses WebRTC (Web Real-Time Communication) technology — the same technology that powers video calls in your browser — to establish a direct, encrypted connection between two devices. Once a connection is made, files travel directly between those two devices without ever passing through our servers.</p>
+        <p>The connection is brokered through PeerJS, an open-source signaling library. The signaling server only helps two devices find each other — it never sees your file data.</p>
+
+        <div class="content-highlight">
+            <p>🔒 <strong>Your files are never stored on Yunze servers.</strong> We have no access to what you share. When the connection closes, everything is gone.</p>
+        </div>
+
+        <h2>What Makes Yunze Different</h2>
+        <p>Most file sharing services work by uploading your file to a cloud server, storing it, and giving the recipient a download link. This means your file sits on someone else's computer — sometimes indefinitely. Yunze eliminates this entirely.</p>
+        <ul>
+            <li><strong>No file size limits</strong> — files are streamed in chunks directly between devices</li>
+            <li><strong>No account required</strong> — open the app, create a room, share the code</li>
+            <li><strong>Cross-network</strong> — works across WiFi, 4G/5G, and different countries</li>
+            <li><strong>End-to-end encrypted</strong> — WebRTC connections are encrypted by default</li>
+            <li><strong>Free forever</strong> — no subscriptions, no premium tiers</li>
+        </ul>
+
+        <h2>The Yunze Brand</h2>
+        <p>Yunze is an independent software team focused on building clean, fast web tools. Our products share a consistent design philosophy: minimal interfaces that get out of your way and let you focus on your work. Follow us on Instagram <a href="https://www.instagram.com/yunze_official" target="_blank" class="text-primary">@yunze_official</a> for updates.</p>
+
+        <h2>Contact &amp; Support</h2>
+        <p>If you encounter issues or have questions, visit our Help &amp; FAQ section within the app. For business inquiries or partnership requests, reach out through our Instagram page.</p>
+    </div>
+</div>
+
+<div id="pagePrivacy" class="content-page">
+    <div class="content-inner">
+        <div class="content-back" onclick="closePage(this.closest('.content-page').id.replace('page','').toLowerCase())">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back
+        </div>
+        <h1>Privacy Policy</h1>
+        <p class="subtitle">Last updated: April 2026. This policy explains what data Yunze Universal Transfer collects and how it is used.</p>
+
+        <h2>Overview</h2>
+        <p>Yunze Universal Transfer ("Yunze", "we", "us") is committed to protecting your privacy. This application is designed from the ground up to minimize data collection. We do not require accounts, we do not store your files, and we do not track your transfers.</p>
+
+        <h2>Data We Do NOT Collect</h2>
+        <ul>
+            <li>We do not store any files you transfer through the application</li>
+            <li>We do not log file names, sizes, or types</li>
+            <li>We do not require you to create an account or provide an email address</li>
+            <li>We do not sell your data to third parties</li>
+            <li>We do not track your transfers or who you connect with</li>
+        </ul>
+
+        <h2>How Peer-to-Peer Connections Work</h2>
+        <p>When you create a room, our app uses PeerJS signaling servers to help two devices discover and connect to each other. During this process, your IP address may briefly be visible to the PeerJS signaling server for the purpose of establishing the connection. Once connected, the data flows directly between devices.</p>
+        <p>PeerJS is an open-source project. You can review their privacy practices at <a href="https://peerjs.com" target="_blank" class="text-primary">peerjs.com</a>.</p>
+
+        <h2>Third-Party Services</h2>
+        <p><strong>PeerJS / PeerJS Cloud:</strong> Used for WebRTC signaling (helping devices find each other). No file data passes through this service.</p>
+        <p><strong>Gofile.io:</strong> Used optionally when you choose "Cloud Share". When you use this feature, your file is uploaded to Gofile's servers. Their privacy policy applies.</p>
+
+        <h2>Cookies</h2>
+        <p>Yunze Universal Transfer does not set any cookies.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>Yunze Universal Transfer is not directed at children under the age of 13. We do not knowingly collect personal information from children.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Changes will be reflected on this page with an updated date. Continued use of the service constitutes acceptance of the updated policy.</p>
+
+        <h2>Contact</h2>
+        <p>For privacy-related questions, contact us through our Instagram page <a href="https://www.instagram.com/yunze_official" target="_blank" class="text-primary">@yunze_official</a>.</p>
+    </div>
+</div>
+
+<div id="pageP2p" class="content-page">
+    <div class="content-inner">
+        <div class="content-back" onclick="closePage(this.closest('.content-page').id.replace('page','').toLowerCase())">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back
+        </div>
+        <h1>What is Peer-to-Peer (P2P) File Transfer?</h1>
+        <p class="subtitle">A complete guide to understanding peer-to-peer technology and how it enables private, fast file sharing.</p>
+
+        <h2>The Traditional Way: Client-Server</h2>
+        <p>In a traditional file sharing model, you upload your file to a central server — think Google Drive, Dropbox, or WeTransfer. The server stores your file, and the recipient downloads it from that server. This is simple and widely understood, but it comes with real trade-offs:</p>
+        <ul>
+            <li>Your file is stored on someone else's infrastructure, often indefinitely</li>
+            <li>File size limits are imposed by the service provider</li>
+            <li>Transfer speed is bottlenecked by server bandwidth, not your connection</li>
+            <li>Your files can be scanned, analyzed, or accessed by the service provider</li>
+            <li>If the service shuts down or restricts your account, you lose access</li>
+        </ul>
+
+        <h2>The P2P Model: Direct Device-to-Device</h2>
+        <p>Peer-to-peer file transfer eliminates the central server from the data path. Instead, the two devices — the sender and the receiver — establish a direct connection with each other and exchange data without any intermediary holding the file.</p>
+        <p>Think of it like this: instead of mailing a letter through a post office that opens and reads it, you hand it directly to the person. The post office might have helped you find their address, but they never touched the envelope.</p>
+
+        <div class="content-highlight">
+            <p>💡 <strong>Key principle:</strong> In P2P transfer, the server helps devices find each other, but it never touches the actual file data. Everything goes directly between the two devices.</p>
+        </div>
+
+        <h2>How WebRTC Powers Modern P2P</h2>
+        <p>WebRTC (Web Real-Time Communication) is an open standard built into every modern browser that enables real-time audio, video, and data communication without plugins. Originally designed for browser-based video calls (used by Google Meet, Discord, and others), WebRTC's data channels are equally powerful for file transfer.</p>
+        <p>WebRTC uses ICE (Interactive Connectivity Establishment) to figure out the best path between two devices. It tries direct connections first, and falls back to relay servers (called TURN servers) only when firewalls block direct connections. This is why Yunze can work across different networks — WiFi to 4G, home network to corporate network.</p>
+
+        <h2>What is a Signaling Server?</h2>
+        <p>Before two devices can connect directly, they need to exchange some initial information — their network addresses, capabilities, and connection preferences. This exchange happens through a "signaling server." Yunze uses PeerJS's signaling infrastructure for this purpose.</p>
+        <p>Crucially, the signaling server only sees connection metadata, not your file data. Once the connection is established, the signaling server is no longer involved. Yunze uses the PeerJS signaling server to broker connections, and then all actual data travels directly between devices.</p>
+
+        <h2>NAT Traversal: Getting Through Firewalls</h2>
+        <p>Most devices don't have a direct public IP address — they're behind a router using NAT (Network Address Translation). This can make direct device-to-device connections tricky. WebRTC handles this using a process called NAT traversal, which finds "holes" in firewalls that allow the two devices to communicate directly.</p>
+        <p>In cases where NAT traversal fails (very strict corporate firewalls, for example), WebRTC falls back to a TURN relay server. Even in this case, the connection remains encrypted end-to-end.</p>
+
+        <h2>Why P2P is Better for Privacy</h2>
+        <p>When you share a file through a cloud service, you're trusting that service with your data — their terms of service, their security practices, their compliance with government requests. With P2P transfer, there's nothing to subpoena: the file was never on a server.</p>
+        <p>WebRTC connections are encrypted using DTLS (Datagram Transport Layer Security), which is the same class of encryption used to secure HTTPS websites. This means your data is protected in transit even when routed through relay servers.</p>
+
+        <h2>P2P vs Cloud: When to Use Each</h2>
+        <p><strong>Use P2P (Yunze) when:</strong></p>
+        <ul>
+            <li>Both parties can be online at the same time</li>
+            <li>You're sharing sensitive files you don't want stored on third-party servers</li>
+            <li>You need to transfer large files without size limits</li>
+            <li>You want maximum transfer speed (direct connection, no server bottleneck)</li>
+        </ul>
+        <p><strong>Use cloud storage when:</strong></p>
+        <ul>
+            <li>The recipient isn't available right now and needs to download later</li>
+            <li>You need to share with many people simultaneously</li>
+            <li>You need permanent storage and retrieval</li>
+        </ul>
+
+        <h2>The Future of P2P</h2>
+        <p>Peer-to-peer technology is becoming increasingly mainstream. As browsers become more capable and WebRTC matures, P2P applications are moving beyond file transfer into collaborative editing, decentralized social networks, and distributed computing. Yunze Universal Transfer is part of this shift toward a more private, user-controlled internet.</p>
+    </div>
+</div>
+
+<div id="pageSecurity" class="content-page">
+    <div class="content-inner">
+        <div class="content-back" onclick="closePage(this.closest('.content-page').id.replace('page','').toLowerCase())">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back
+        </div>
+        <h1>Secure File Transfer: A Complete Guide</h1>
+        <p class="subtitle">Best practices for keeping your files safe when sharing them across the internet — whether you use Yunze or any other service.</p>
+
+        <h2>Why File Transfer Security Matters</h2>
+        <p>Every time you share a file digitally, you're making decisions that have security implications. Who can access the file in transit? Where is it stored? Who can see it? How long does it persist? Most people share files without thinking about these questions — and most file sharing services are designed to keep you from thinking about them.</p>
+        <p>This guide breaks down the key security concepts behind file transfer so you can make informed decisions about how you share sensitive information.</p>
+
+        <h2>Encryption in Transit</h2>
+        <p>The most fundamental security requirement for any file transfer is encryption in transit — ensuring that if someone intercepts your data while it's traveling across the internet, they can't read it. There are two main approaches:</p>
+        <p><strong>TLS/HTTPS encryption:</strong> Most cloud services (Dropbox, Google Drive, WeTransfer) use TLS to encrypt the connection between your device and their servers. This protects your file from network eavesdroppers, but the service provider still receives and can access your unencrypted file.</p>
+        <p><strong>End-to-end encryption (E2EE):</strong> With E2EE, the file is encrypted on your device before it leaves, and only the intended recipient can decrypt it. Even the service provider cannot access the file. Yunze's WebRTC data channels use DTLS, which provides strong encryption that even the signaling server cannot read.</p>
+
+        <div class="content-highlight">
+            <p>🛡️ <strong>Yunze uses WebRTC DTLS encryption</strong> — your files are encrypted between your device and the recipient's device. No intermediary can read them.</p>
+        </div>
+
+        <h2>Encryption at Rest</h2>
+        <p>Encryption at rest refers to how files are stored. Cloud services that store your files should encrypt them on their servers — but "encrypted at rest" doesn't mean the service can't read them. It just means someone who steals their hard drives can't. The service provider still holds the encryption keys.</p>
+        <p>Yunze avoids this problem entirely: your files are never stored on our servers. There's nothing to encrypt at rest because there's nothing at rest.</p>
+
+        <h2>Best Practices for Sharing Sensitive Files</h2>
+        <p><strong>1. Use end-to-end encrypted transfer methods</strong><br>
+        For truly sensitive files (legal documents, financial records, medical information), use services that offer genuine end-to-end encryption. P2P tools like Yunze are excellent for this because files never touch a server.</p>
+
+        <p><strong>2. Encrypt the file itself before sharing</strong><br>
+        For an extra layer of protection, encrypt a file before sending it — even through an already-encrypted channel. Tools like 7-Zip allow you to create password-protected archives. Share the password through a different channel (phone call, in-person).</p>
+
+        <p><strong>3. Verify the recipient</strong><br>
+        Before sharing sensitive files, confirm you're communicating with the right person. In Yunze, room codes are short-lived and session-based — they expire when the connection closes. Always share room codes through a trusted channel.</p>
+
+        <p><strong>4. Use a secure network</strong><br>
+        Avoid sharing sensitive files over public WiFi networks without additional protection. While Yunze's WebRTC connections are encrypted, other traffic on your device may not be. Consider using a VPN on public networks.</p>
+
+        <p><strong>5. Be careful with cloud-based fallbacks</strong><br>
+        When using Yunze's "Cloud Share" feature, your file is uploaded to a third-party service. This is convenient but doesn't have the same privacy guarantees as a direct P2P transfer. Use this feature only for non-sensitive files.</p>
+
+        <h2>Common File Transfer Security Mistakes</h2>
+        <ul>
+            <li><strong>Sharing via email attachments</strong> — Email is not encrypted by default. Attachments can be read by email providers, corporate IT, and anyone who intercepts the message.</li>
+            <li><strong>Using public upload services without expiry</strong> — Files uploaded to services like Imgur or anonymous file hosts may remain publicly accessible indefinitely.</li>
+            <li><strong>Reusing room codes or links</strong> — Old links or codes can be accessed by unintended parties. Always create a fresh session for each transfer.</li>
+            <li><strong>Ignoring file metadata</strong> — Documents like PDFs and Word files can contain metadata (author name, editing history, GPS coordinates in photos). Consider stripping metadata from sensitive files before sharing.</li>
+        </ul>
+
+        <h2>Understanding Your Threat Model</h2>
+        <p>Security is always a trade-off. The right level of security depends on what you're protecting and who you're protecting it from. A casual user sharing vacation photos has very different needs than a journalist sharing sensitive sources.</p>
+        <p>For most everyday file transfers, a service like Yunze provides excellent security: direct P2P, encrypted connection, no server storage. For very high-risk scenarios, consider additional measures: file-level encryption, air-gapped devices, or specialized secure communication tools.</p>
+
+        <h2>Why We Built Yunze</h2>
+        <p>Yunze was built because we believe privacy-respecting file transfer should be accessible to everyone — not just people with technical expertise. By building on WebRTC and keeping the interface simple, we've made it possible for anyone to share files with strong security guarantees, no account required, and no file size limits. We believe the future of file sharing is direct, private, and user-controlled.</p>
+    </div>
+</div>
+
 </body>
 </html>
