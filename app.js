@@ -224,7 +224,29 @@ function clearAttachment() {
     if (prev) prev.style.display = 'none';
     const fi = document.getElementById('fileInput');
     if (fi) fi.value = '';
+    const gi = document.getElementById('galleryInput');
+    if (gi) gi.value = '';
 }
+
+function toggleAttachMenu() {
+    const menu = document.getElementById('attachMenu');
+    if (!menu) return;
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+function closeAttachMenu() {
+    const menu = document.getElementById('attachMenu');
+    if (menu) menu.style.display = 'none';
+}
+
+// Close attach menu when clicking outside
+document.addEventListener('click', function(e) {
+    const menu = document.getElementById('attachMenu');
+    const btn = document.getElementById('attachMenuBtn');
+    if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.style.display = 'none';
+    }
+});
 
 // Send chat message
 async function sendChatMessage() {

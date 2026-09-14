@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Yunze Universal Transfer | Secure File Sharing</title>
   <meta name="description" content="Yunze — free, no-storage P2P file transfer. Share large files across WiFi, 4G/5G and different networks. No signup, no storage, WebRTC encrypted.">
-  <link rel="canonical" href="https://yunzetransfer.com/">
+  <link rel="canonical" href="https://yunzetransfer.pages.dev/">
   <meta name="google-site-verification" content="KHbfLhfT2NixoliuNL-jtJTUyaWbYWdygtgmAtVz21Y" />
   <!-- Open Graph -->
   <meta property="og:site_name" content="Yunze Universal Transfer">
   <meta property="og:title" content="Yunze Universal Transfer | Secure File Sharing">
   <meta property="og:description" content="Yunze — free, no-storage P2P file transfer. Share large files across WiFi, 4G/5G and different networks. No signup, no storage, WebRTC encrypted.">
-  <meta property="og:url" content="https://yunzetransfer.com/">
+  <meta property="og:url" content="https://yunzetransfer.pages.dev/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://yunzetransfer.com/yunze-icon.png">
+  <meta property="og:image" content="https://yunzetransfer.pages.dev/yunze-icon.png">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Yunze Universal Transfer | Secure File Sharing">
   <meta name="twitter:description" content="Yunze — free, no-storage P2P file transfer. Share large files across WiFi, 4G/5G and different networks. No signup, no storage, WebRTC encrypted.">
-  <meta name="twitter:image" content="https://yunzetransfer.com/yunze-icon.png">
+  <meta name="twitter:image" content="https://yunzetransfer.pages.dev/yunze-icon.png">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" href="yunze-icon.png">
 <link rel="manifest" href="manifest.json">
@@ -34,7 +34,7 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Yunze Universal Transfer",
-  "url": "https://yunzetransfer.com/",
+  "url": "https://yunzetransfer.pages.dev/",
   "description": "Free, no-storage P2P file transfer. Share large files across WiFi, 4G/5G and different networks.",
   "publisher": {
     "@type": "Organization",
@@ -49,7 +49,7 @@
     <div class="header">
         <h1 class="logo">⚡ YUNZE</h1>
         <div class="tagline">Universal Secure File Transfer &mdash; Cross-Network P2P</div>
-        <div style="font-size: 10px; opacity: 0.6; margin-top: 5px;">v1.1.0</div>
+        <div style="font-size: 10px; opacity: 0.6; margin-top: 5px;">v1.2.0</div>
     </div>
 
     <!-- HOME VIEW -->
@@ -281,8 +281,13 @@
 
             <!-- Input Bar -->
             <div class="chat-input-wrap">
-                <div class="chat-input-row">
-                    <button class="chat-attach-btn" onclick="document.getElementById('fileInput').click()" title="Attach file">📎</button>
+                <div class="chat-input-row" style="position:relative;">
+                    <button class="chat-attach-btn" onclick="toggleAttachMenu()" id="attachMenuBtn" title="Attach file">📎</button>
+                    <div id="attachMenu" style="display:none;position:absolute;bottom:52px;left:0;background:#1a1830;border:1px solid rgba(255,255,255,0.12);border-radius:14px;overflow:hidden;z-index:100;min-width:150px;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+                        <button onclick="document.getElementById('galleryInput').click();closeAttachMenu();" style="display:flex;align-items:center;gap:10px;width:100%;padding:13px 16px;background:none;border:none;color:rgba(255,255,255,0.85);font-size:0.88rem;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.07);">🖼️ Gallery</button>
+                        <button onclick="document.getElementById('fileInput').click();closeAttachMenu();" style="display:flex;align-items:center;gap:10px;width:100%;padding:13px 16px;background:none;border:none;color:rgba(255,255,255,0.85);font-size:0.88rem;cursor:pointer;">📁 Files</button>
+                    </div>
+                    <input type="file" class="file-input" id="galleryInput" accept="image/*,video/*" multiple onchange="handleFiles(this.files)">
                     <input type="file" class="file-input" id="fileInput" multiple onchange="handleFiles(this.files)">
                     <textarea class="chat-text-input" id="chatTextInput" placeholder="Type a message..." rows="1" onkeydown="chatKeyDown(event)" oninput="autoResizeTextarea(this)"></textarea>
                     <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()" title="Send">
