@@ -9,7 +9,7 @@
   [![Live Site](https://img.shields.io/badge/Live-yunzetransfer.pages.dev-blue)](https://yunzetransfer.pages.dev)
   ![Version](https://img.shields.io/badge/version-1.2.0-brightgreen)
 
-  🔗 **Live app:** [yunzetransfer.pages.dev](https://yunzetransfer.pages.dev)
+  🔗 **Live app:** [yunzetransfer.com](https://yunzetransfer.com)
 </div>
 
 ---
