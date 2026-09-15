@@ -6,10 +6,10 @@
   **Free, private, peer-to-peer file sharing — no accounts, no servers, no size limits.**
 
   [![License: BSD 3-Clause](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg)](LICENSE)
-  [![Live Site](https://img.shields.io/badge/Live-yunzetransfer.com-blue)](https://yunzetransfer.com)
-  ![Version](https://img.shields.io/badge/version-1.1.0-brightgreen)
+  [![Live Site](https://img.shields.io/badge/Live-yunzetransfer.pages.dev-blue)](https://yunzetransfer.pages.dev)
+  ![Version](https://img.shields.io/badge/version-1.2.0-brightgreen)
 
-  🔗 **Live app:** [yunzetransfer.com](https://yunzetransfer.com)
+  🔗 **Live app:** [yunzetransfer.pages.dev](https://yunzetransfer.pages.dev)
 </div>
 
 ---
@@ -38,7 +38,6 @@
 - [Tech Stack](#tech-stack)
 - [Running Locally](#running-locally)
 - [Deployment](#deployment)
-- [SEO Architecture](#seo-architecture)
 - [Security & Privacy Model](#security--privacy-model)
 - [Known Limitations](#known-limitations)
 - [Browser Compatibility](#browser-compatibility)
@@ -80,7 +79,6 @@ This README documents not just *what* Yunze does, but *how* it does it, down to 
 | 🖼️ Inline media preview | Images, videos, and common file types render a preview directly in the chat bubble before download |
 | 📱 Screen Wake Lock | Keeps the screen from sleeping mid-transfer using the Screen Wake Lock API |
 | ☁️ Cloud Share fallback | Optional one-way upload via gofile.io for when both devices can't be online simultaneously |
-| 🌐 SEO-crawlable pages | About, Privacy, P2P Guide, and Security Guide are real standalone HTML pages, not JS-only overlays |
 | 📲 PWA support | Installable to your home screen via `manifest.json`, works like a native app shell |
 
 ## Deep Dive: How Peer-to-Peer Transfer Works
@@ -170,14 +168,11 @@ Copying the room code or link (`copyToClipboard()`) primarily uses the modern `n
 ## Full File Structure
 
 ```
-├── index.html            # Main single-page app: room UI, transfer UI, Cloud Share, Help modal, footer
+├── index.html            # Main single-page app: room UI, transfer UI, Cloud Share, Help modal,
+│                           #   About/Privacy/P2P/Security overlays, footer
 ├── app.js                 # All application logic (~1650 lines, 80+ functions) — see reference below
 ├── styles.css              # All styling: CSS variables, layout, responsive breakpoints, animations
-├── about.html               # Standalone "About" page (SEO-crawlable)
-├── privacy.html               # Standalone Privacy Policy page
-├── p2p.html                     # Standalone "What is P2P?" technical guide
-├── security.html                 # Standalone security best-practices guide
-├── sitemap.xml                    # XML sitemap listing all 5 crawlable URLs
+├── sitemap.xml                    # XML sitemap (homepage only)
 ├── manifest.json                   # PWA manifest (icons, name, theme color, display mode)
 ├── favicon.ico / yunze-icon.png     # App icons (ICO + PNG, used for favicon, PWA icon, OG image)
 ├── _redirects                        # Cloudflare Pages SPA fallback rule (all paths → index.html)
@@ -215,7 +210,7 @@ Copying the room code or link (`copyToClipboard()`) primarily uses the modern `n
 
 Colors, spacing, and effects are defined as CSS custom properties at the top of `styles.css`, making the whole visual theme adjustable from one place. Key characteristics:
 
-- **Dark, gradient-based background** (`#0f0c29` → mid → light tones), consistent across the main app and all standalone pages
+- **Dark, gradient-based background** (`#0f0c29` → mid → light tones), consistent across the entire app
 - **Glassmorphism-style cards**: semi-transparent backgrounds with subtle borders and `backdrop-filter: blur()`
 - **Responsive breakpoints** for mobile-first layout (logo size, padding, and container width all scale down on narrow viewports)
 - **CSS keyframe animations**: `fadeIn`, `fadeInDown`, `fadeInUp` for view transitions and toasts
@@ -273,16 +268,6 @@ To deploy your own fork:
 2. Go to [Cloudflare Pages](https://pages.dev) → **Create a project** → **Connect to Git**
 3. Select your fork, leave build settings empty (static site), and deploy
 
-## SEO Architecture
-
-Because the core app (`index.html`) is a single-page application, secondary content is deliberately built as **separate standalone HTML files** rather than JavaScript-toggled overlays:
-
-- `about.html`, `privacy.html`, `p2p.html`, `security.html` each have their own `<title>`, meta description, canonical URL, and Open Graph/Twitter Card tags
-- `sitemap.xml` lists all 5 crawlable URLs (homepage + 4 subpages) so search engines can discover them without depending on internal links alone
-- The homepage's brand name (`<h1 class="logo">⚡ YUNZE</h1>`) uses a proper semantic heading tag — this was previously a styled `<div>`, which search engines and accessibility tools don't treat as a page heading
-
-This structure exists because Google/Bing cannot index content that only appears after JavaScript shows a hidden `<div>` in the same way they index a page with its own dedicated URL and metadata.
-
 ## Security & Privacy Model
 
 - **No server-side file storage** — by default, files never touch any server; they move directly between the two connected devices over an encrypted WebRTC DataChannel.
@@ -291,7 +276,7 @@ This structure exists because Google/Bing cannot index content that only appears
 - **Signaling metadata only** — the PeerJS signaling server sees connection setup information (used to establish the WebRTC link) but never sees file contents.
 - **Cloud Share caveat** — opting into the gofile.io upload path means that specific file is stored on gofile's infrastructure, subject to their policies. This is presented as a clearly separate, opt-in mode.
 
-Full details: [Privacy Policy](https://yunzetransfer.com/privacy.html) · [Security Guide](https://yunzetransfer.com/security.html)
+Full details: [Privacy Policy](https://yunzetransfer.com) · [Security Guide](https://yunzetransfer.com)
 
 ## Known Limitations
 
@@ -312,13 +297,18 @@ Full details: [Privacy Policy](https://yunzetransfer.com/privacy.html) · [Secur
 
 ## Version History
 
+**v1.2.0**
+- Added gallery picker in chat: tapping 📎 now shows a "Gallery" and "Files" option; Gallery opens the photo/video library directly on mobile.
+- Reverted About/Privacy/P2P/Security pages back to in-app overlays (were briefly separate HTML files; consolidated back for a cleaner single-page experience).
+- Migrated from `yunzetransfer.pages.dev` to `yunzetransfer.com`.
+
 **v1.1.0**
 - Fixed the Help & FAQ screen not displaying — the modal was nested inside the app's internal view container, which silently broke its `position: fixed` behavior; it's now rendered as a fully independent, top-level overlay.
 - Minor SEO improvement: the homepage brand name now uses a semantic `<h1>` tag instead of a styled `<div>`.
 - Added a GitHub repository link and a contact email to the site footer.
 
 **v1.0.0**
-- Initial public release: WebRTC peer-to-peer transfer, room code / QR pairing, in-session chat, batch transfers, Cloud Share (gofile.io) fallback, standalone SEO pages, BSD 3-Clause license.
+- Initial public release: WebRTC peer-to-peer transfer, room code / QR pairing, in-session chat, batch transfers, Cloud Share (gofile.io) fallback, BSD 3-Clause license.
 
 ## Roadmap
 
