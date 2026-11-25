@@ -30,8 +30,8 @@
 <link rel="apple-touch-icon" href="yunze-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -49,15 +49,18 @@
 <body>
 <div class="container">
 
-    <div class="header">
-        <h1 class="logo"><svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 4 14h6.5L9.5 22 20 9.5h-6.8z" fill="currentColor"/></svg>YUNZE</h1>
-        <div class="tagline">Send files straight to another device. No account, no upload, no size limit.</div>
-        
-    </div>
+    <nav class="nav"><div class="brand"><svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 4 14h6.5L9.5 22 20 9.5h-6.8z" fill="currentColor"/></svg>YUNZE</div><div class="nav-links"><button onclick="openPage('p2p')">How it works</button><button onclick="openPage('privacy')">Privacy</button></div></nav>
 
     <!-- HOME VIEW -->
     <div id="viewHome" class="view active">
-        <div class="main-card">
+        <section class="hero">
+            <div class="hero-copy">
+                <h1 class="hero-title" data-enter>Send files directly.<br><span>Nothing in between.</span></h1>
+                <p class="hero-sub" data-enter>Yunze links two devices straight to each other. No account, no upload, no size limit.</p>
+                <ul class="hero-facts" data-enter><li>Encrypted end to end</li><li>Works across any network</li><li>Free, no sign-up</li></ul>
+            </div>
+            <div class="hero-card" data-enter>
+            <div class="main-card">
             <div class="tabs">
                 <div class="tab active" id="tabCode" onclick="switchHomeTab('code')"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg> Enter code</div>
                 <div class="tab" id="tabScan" onclick="switchHomeTab('scan')"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> Scan QR</div>
@@ -127,14 +130,28 @@
             <button class="btn btn-success" onclick="createRoom()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Create new room</button>
             <div class="divider"><span>or</span></div>
             <button class="btn btn-cloud" onclick="showView('CloudShare')"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1-.5-8A5.5 5.5 0 0 1 17 8.5 4.5 4.5 0 0 1 17 18z"/></svg> Cloud share (no P2P needed)</button>
-        </div>
+            </div>
+        </section>
 
-        <div class="info-grid">
-            <div class="info-card"><h4><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg> Works across networks</h4><p>Works across WiFi, 4G/5G, different countries. PeerJS relay handles NAT & firewalls automatically.</p></div>
-            <div class="info-card"><h4><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Direct and encrypted</h4><p>Once connected, data flows directly between devices — no server ever touches your files unless you request a share link.</p></div>
-            <div class="info-card"><h4><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2zM14 20h2"/></svg> Pair with a QR code</h4><p>Host shows QR, guest scans it — connection established automatically.</p></div>
-            <div class="info-card"><h4><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg> Turn a file into a link</h4><p>Convert received files into shareable public download links (via gofile.io).</p></div>
-        </div>
+        <section class="how">
+            <h2>Two devices. One direct line.</h2>
+            <svg class="flow" viewBox="0 0 520 120" role="img" aria-label="Device A connected directly to device B"><g transform="translate(0,0)"><g class="dev"><rect x="2" y="10" width="64" height="100" rx="12"/><rect x="10" y="20" width="48" height="70" rx="4" class="scr"/></g></g><g transform="translate(454,0)"><g class="dev"><rect x="2" y="10" width="64" height="100" rx="12"/><rect x="10" y="20" width="48" height="70" rx="4" class="scr"/></g></g><line x1="78" y1="60" x2="442" y2="60" class="wire"/><circle r="5" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" path="M78 60 L442 60"/></circle></svg>
+            <ol class="steps">
+                <li><b>Create a room</b><span>One device gets a five-character code and a QR code.</span></li>
+                <li><b>Join from the other</b><span>Type the code or scan the QR. The link forms in seconds.</span></li>
+                <li><b>Send anything</b><span>Files go straight across in chunks, so size is never the limit.</span></li>
+            </ol>
+        </section>
+
+        <section class="feats">
+            <h2>Built for privacy, not for storage.</h2>
+            <div class="bento">
+                <article class="feat wide"><h3>Direct and encrypted</h3><p>Data moves over an encrypted WebRTC channel between your two devices. Nothing is stored on a Yunze server.</p></article>
+                <article class="feat "><h3>Any network</h3><p>WiFi to 4G or 5G, even across countries.</p></article>
+                <article class="feat "><h3>QR pairing</h3><p>Scan the host screen and you are connected.</p></article>
+                <article class="feat wide"><h3>File to link</h3><p>Need the other person offline? Turn a file into a download link.</p></article>
+            </div>
+        </section>
     </div>
 
     <!-- CLOUD SHARE VIEW -->
@@ -390,40 +407,9 @@ function toggleHelpModal() {
 </script>
 
 <!-- Footer -->
-<footer style="text-align:center;padding:40px 20px 30px;margin-top:20px;border-top:1px solid rgba(255,255,255,0.06);">
-    <div style="font-size:1.4rem;font-weight:800;background:linear-gradient(45deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-1px;margin-bottom:8px;">YUNZE</div>
-    <div style="color:rgba(255,255,255,0.35);font-size:0.8rem;letter-spacing:1px;margin-bottom:14px;">UNIVERSAL FILE TRANSFER</div>
-    <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:16px;">
-        <span class="text-dim">Cross-Network P2P</span>
-        <span class="text-dim">WebRTC Encrypted</span>
-        <span class="text-dim">No Size Limit</span>
-        <span class="text-dim">Zero Server Storage</span>
-    </div>
-    <div style="color:rgba(255,255,255,0.2);font-size:0.75rem;">Yunze© 2026 &mdash; Built with WebRTC &amp; PeerJS &mdash; Files are transferred directly between devices, never stored automatically</div>
-    <div style="margin-top:10px;display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;">
-        <a href="https://www.instagram.com/yunze_official" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.35);font-size:0.78rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='rgba(225,48,108,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            @yunze_official
-        </a>
-        <a href="https://github.com/yunuseeeeeeee/Yunze-Transfer" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.35);font-size:0.78rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.755-1.333-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            GitHub
-        </a>
-        <a href="https://ko-fi.com/yunzeofficial" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,216,77,0.12);border:1px solid rgba(255,216,77,0.25);color:rgba(255,216,77,0.75);font-size:0.78rem;font-weight:600;text-decoration:none;padding:6px 14px;border-radius:20px;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,216,77,0.22)';this.style.color='rgba(255,216,77,1)';this.style.borderColor='rgba(255,216,77,0.5)'" onmouseout="this.style.background='rgba(255,216,77,0.12)';this.style.color='rgba(255,216,77,0.75)';this.style.borderColor='rgba(255,216,77,0.25)'">
-            &#9749; Support on Ko-fi
-        </a>
-    </div>
-    <div style="margin-top:18px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
-        <span onclick="openPage('about')" class="text-faint-link">About Yunze</span>
-        <span onclick="openPage('privacy')" class="text-faint-link">Privacy Policy</span>
-        <span onclick="openPage('p2p')" class="text-faint-link">What is P2P?</span>
-        <span onclick="openPage('security')" class="text-faint-link">Secure Transfer Guide</span>
-    </div>
-    <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);">
-        <div style="color:rgba(255,255,255,0.25);font-size:0.72rem;letter-spacing:1px;margin-bottom:6px;">CONTACT</div>
-        <a href="mailto:yunusemrecontact@proton.me" style="color:rgba(255,255,255,0.4);font-size:0.78rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='rgba(150,230,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">✉️ yunusemrecontact@proton.me</a>
-    </div>
-</footer>
+<footer class="foot"><div class="foot-in"><div class="brand"><svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 4 14h6.5L9.5 22 20 9.5h-6.8z" fill="currentColor"/></svg>YUNZE</div>
+<div class="foot-links"><button onclick="openPage('about')">About</button><button onclick="openPage('privacy')">Privacy</button><button onclick="openPage('security')">Security</button><a href="https://github.com/yunuseeeeeeee/Yunze-Transfer" target="_blank" rel="noopener">GitHub</a><a href="https://www.instagram.com/yunze_official" target="_blank" rel="noopener">Instagram</a><a href="mailto:yunusemrecontact@proton.me">Contact</a></div>
+<p>Yunze &copy; 2026. Built with WebRTC and PeerJS. Files travel between devices and are never stored automatically.</p></div></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.2/peerjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
