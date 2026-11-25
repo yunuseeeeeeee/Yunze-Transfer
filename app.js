@@ -915,7 +915,7 @@ function csHandleFile(file) {
     document.getElementById('csFileSize').textContent = fmtSize(file.size);
     const btn = document.getElementById('csUploadBtn');
     btn.disabled = false;
-    btn.style.color = 'rgba(200,170,255,0.95)';
+    btn.style.color = 'rgba(150,230,255,0.95)';
     btn.style.cursor = 'pointer';
     document.getElementById('csLinkResult').style.display = 'none';
 }
@@ -927,7 +927,7 @@ function csClearFile() {
     document.getElementById('csLinkResult').style.display = 'none';
     const btn = document.getElementById('csUploadBtn');
     btn.disabled = true;
-    btn.style.color = 'rgba(200,170,255,0.6)';
+    btn.style.color = 'rgba(150,230,255,0.6)';
     btn.style.cursor = 'not-allowed';
 }
 
@@ -987,7 +987,7 @@ function csCheckLink() {
     const btn = document.getElementById('csDownloadBtn');
     const valid = val.includes('gofile.io');
     btn.disabled = !valid;
-    btn.style.color = valid ? 'rgba(200,170,255,0.95)' : 'rgba(200,170,255,0.6)';
+    btn.style.color = valid ? 'rgba(150,230,255,0.95)' : 'rgba(150,230,255,0.6)';
     btn.style.cursor = valid ? 'pointer' : 'not-allowed';
 }
 
