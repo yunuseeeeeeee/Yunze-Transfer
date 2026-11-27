@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -54,12 +54,37 @@
     <!-- HOME VIEW -->
     <div id="viewHome" class="view active">
         <section class="hero">
-            <div class="hero-copy">
-                <h1 class="hero-title" data-enter>Send files directly.<br><span>Nothing in between.</span></h1>
-                <p class="hero-sub" data-enter>Yunze links two devices straight to each other. No account, no upload, no size limit.</p>
-                <ul class="hero-facts" data-enter><li>Encrypted end to end</li><li>Works across any network</li><li>Free, no sign-up</li></ul>
-            </div>
-            <div class="hero-card" data-enter>
+            <span class="pill" data-enter>Free &middot; Peer to peer &middot; No account</span>
+            <h1 class="hero-title" data-enter>Files go straight from<br><span>one device to another.</span></h1>
+            <p class="hero-sub" data-enter>Yunze connects two devices directly. Nothing is uploaded to a server, nothing is stored, and you never sign up.</p>
+            <div class="hero-cta" data-enter><button class="btn btn-primary" onclick="openLaunch()">Start sending <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="btn btn-cloud" href="#how">See how it works</a></div>
+            <svg class="stage" viewBox="0 0 720 250" role="img" aria-label="Files flowing directly between two devices"><defs><radialGradient id="g"><stop offset="0" stop-color="#00d2ff" stop-opacity=".35"/><stop offset="1" stop-color="#00d2ff" stop-opacity="0"/></radialGradient></defs><ellipse cx="360" cy="125" rx="300" ry="90" fill="url(#g)"/><path id="p0" d="M120 105 C 300 45, 420 165, 600 105" class="wire"/><rect width="26" height="18" rx="4" class="chip"><animateMotion dur="3.0s" begin="0.0s" repeatCount="indefinite" rotate="auto"><mpath href="#p0"/></animateMotion></rect><path id="p1" d="M120 125 C 300 65, 420 185, 600 125" class="wire"/><rect width="26" height="18" rx="4" class="chip"><animateMotion dur="3.6s" begin="0.7s" repeatCount="indefinite" rotate="auto"><mpath href="#p1"/></animateMotion></rect><path id="p2" d="M120 145 C 300 85, 420 205, 600 145" class="wire"/><rect width="26" height="18" rx="4" class="chip"><animateMotion dur="4.2s" begin="1.4s" repeatCount="indefinite" rotate="auto"><mpath href="#p2"/></animateMotion></rect><g transform="translate(18,40)"><rect width="92" height="170" rx="16" class="d1"/><rect x="9" y="14" width="74" height="142" rx="8" class="d2"/><rect x="20" y="30" width="52" height="8" rx="4" class="d3"/><rect x="20" y="46" width="34" height="8" rx="4" class="d3"/></g><g transform="translate(610,40)"><rect width="92" height="170" rx="16" class="d1"/><rect x="9" y="14" width="74" height="142" rx="8" class="d2"/><rect x="20" y="30" width="52" height="8" rx="4" class="d3"/><rect x="20" y="46" width="34" height="8" rx="4" class="d3"/></g></svg>
+        </section>
+        <section class="strip" data-reveal><div><b>0</b><span>accounts needed</span></div><div><b>0</b><span>files kept on servers</span></div><div><b>5</b><span>characters to connect</span></div><div><b>QR</b><span>pairing built in</span></div></section>
+        <section class="how" id="how"><h2 data-reveal>Two devices. One direct line.</h2><ol class="steps">
+            <li data-reveal><b>Create a room</b><span>One device gets a five-character code and a QR code.</span></li>
+            <li data-reveal><b>Join from the other</b><span>Type the code or scan the QR. The link forms in seconds.</span></li>
+            <li data-reveal><b>Send anything</b><span>Files travel straight across in chunks, device to device.</span></li></ol></section>
+        <section class="feats"><h2 data-reveal>Built for privacy, not for storage.</h2><div class="bento">
+            <article class="feat wide" data-reveal><div class="fi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><h3>Direct and encrypted</h3><p>Data moves over an encrypted WebRTC channel between your two devices. No Yunze server sees your files.</p></article>
+            <article class="feat " data-reveal><div class="fi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></div><h3>Any network</h3><p>WiFi to mobile data, even across countries.</p></article>
+            <article class="feat " data-reveal><div class="fi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2z"/></svg></div><h3>QR pairing</h3><p>Scan the host screen and you are connected.</p></article>
+            <article class="feat " data-reveal><div class="fi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></div><h3>Chat while you send</h3><p>Messages and files share one thread, with live speed.</p></article>
+            <article class="feat wide" data-reveal><div class="fi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><h3>File to link</h3><p>Other person offline? Turn a file into a download link with Cloud share.</p></article></div></section>
+        <section class="uses"><h2 data-reveal>Made for the everyday jump.</h2><div class="bento">
+            <article class="feat " data-reveal><div class="fi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/></svg></div><h3>Phone to computer</h3><p>Move photos and documents without a cable or an app.</p></article>
+            <article class="feat " data-reveal><div class="fi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg></div><h3>Across the world</h3><p>Send to a friend in another country with just a code.</p></article>
+            <article class="feat " data-reveal><div class="fi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/></svg></div><h3>Big files</h3><p>No attachment limits like email, so videos and archives are fine.</p></article></div></section>
+        <section class="cmp"><h2 data-reveal>Why not email or a drive?</h2><div class="tw" data-reveal><table><thead><tr><th></th><th class="us">Yunze</th><th>Email</th><th>Cloud drive</th></tr></thead><tbody><tr><td>Account needed</td><td class="us">No</td><td>Yes</td><td>Yes</td></tr><tr><td>Stored on a server</td><td class="us">No</td><td>Yes</td><td>Yes</td></tr><tr><td>Works across networks</td><td class="us">Yes</td><td>Yes</td><td>Yes</td></tr><tr><td>Live, device to device</td><td class="us">Yes</td><td>No</td><td>No</td></tr><tr><td>Setup</td><td class="us">A 5-character code</td><td>Compose and attach</td><td>Upload, then share</td></tr></tbody></table></div></section>
+        <section class="faq"><h2 data-reveal>Questions</h2>
+            <details data-reveal><summary>Is it really free?</summary><p>Yes. There is no account, no plan and no limit on how many rooms you create.</p></details>
+            <details data-reveal><summary>Are my files stored anywhere?</summary><p>In a room, files move directly between the two devices. They are not kept on a Yunze server. Cloud share is the exception, since it creates a link.</p></details>
+            <details data-reveal><summary>Do both devices need to be online together?</summary><p>For a room, yes, keep both tabs open. If not, use Cloud share.</p></details>
+            <details data-reveal><summary>Does it work on iPhone and Android?</summary><p>Yes, in any modern browser. Nothing to install.</p></details></section>
+        <section class="final" data-reveal><h2>Ready when you are.</h2><button class="btn btn-primary" onclick="openLaunch()">Start sending</button></section>
+
+        <div class="launch" id="launch" onclick="if(event.target===this)closeLaunch()">
+            <div class="launch-in"><button class="x" onclick="closeLaunch()" aria-label="Close">&times;</button>
             <div class="main-card">
             <div class="tabs">
                 <div class="tab active" id="tabCode" onclick="switchHomeTab('code')"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg> Enter code</div>
@@ -130,28 +155,7 @@
             <button class="btn btn-success" onclick="createRoom()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Create new room</button>
             <div class="divider"><span>or</span></div>
             <button class="btn btn-cloud" onclick="showView('CloudShare')"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1-.5-8A5.5 5.5 0 0 1 17 8.5 4.5 4.5 0 0 1 17 18z"/></svg> Cloud share (no P2P needed)</button>
-            </div>
-        </section>
-
-        <section class="how">
-            <h2>Two devices. One direct line.</h2>
-            <svg class="flow" viewBox="0 0 520 120" role="img" aria-label="Device A connected directly to device B"><g transform="translate(0,0)"><g class="dev"><rect x="2" y="10" width="64" height="100" rx="12"/><rect x="10" y="20" width="48" height="70" rx="4" class="scr"/></g></g><g transform="translate(454,0)"><g class="dev"><rect x="2" y="10" width="64" height="100" rx="12"/><rect x="10" y="20" width="48" height="70" rx="4" class="scr"/></g></g><line x1="78" y1="60" x2="442" y2="60" class="wire"/><circle r="5" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" path="M78 60 L442 60"/></circle></svg>
-            <ol class="steps">
-                <li><b>Create a room</b><span>One device gets a five-character code and a QR code.</span></li>
-                <li><b>Join from the other</b><span>Type the code or scan the QR. The link forms in seconds.</span></li>
-                <li><b>Send anything</b><span>Files go straight across in chunks, so size is never the limit.</span></li>
-            </ol>
-        </section>
-
-        <section class="feats">
-            <h2>Built for privacy, not for storage.</h2>
-            <div class="bento">
-                <article class="feat wide"><h3>Direct and encrypted</h3><p>Data moves over an encrypted WebRTC channel between your two devices. Nothing is stored on a Yunze server.</p></article>
-                <article class="feat "><h3>Any network</h3><p>WiFi to 4G or 5G, even across countries.</p></article>
-                <article class="feat "><h3>QR pairing</h3><p>Scan the host screen and you are connected.</p></article>
-                <article class="feat wide"><h3>File to link</h3><p>Need the other person offline? Turn a file into a download link.</p></article>
-            </div>
-        </section>
+            </div></div></div>
     </div>
 
     <!-- CLOUD SHARE VIEW -->
@@ -276,14 +280,14 @@
 
             <!-- Transfer Tips Banner -->
             <div class="transfer-tips-banner hidden" id="transferTipsBanner">
-                <div class="tips-icon">⚠️</div>
+                <div class="tips-icon">!</div>
                 <div class="tips-body">
                     <div class="tips-title">Tips for a smooth transfer</div>
                     <ul class="tips-list">
-                        <li><span>📱</span><span>Keep this tab open on both devices — closing it will disconnect the session.</span></li>
-                        <li><span>📶</span><span>Make sure both devices have an active internet connection (Wi-Fi or mobile data).</span></li>
-                        <li><span>🔄</span><span>If the connection drops, refresh the page on both devices and create a new room.</span></li>
-                        <li><span>⏳</span><span>Large files may take a while — speed depends on both devices' internet connections.</span></li>
+                        <li><span class="dot"></span><span>Keep this tab open on both devices — closing it will disconnect the session.</span></li>
+                        <li><span class="dot"></span><span>Make sure both devices have an active internet connection (Wi-Fi or mobile data).</span></li>
+                        <li><span class="dot"></span><span>If the connection drops, refresh the page on both devices and create a new room.</span></li>
+                        <li><span class="dot"></span><span>Large files may take a while — speed depends on both devices' internet connections.</span></li>
                     </ul>
                 </div>
                 <button class="tips-close" onclick="document.getElementById('transferTipsBanner').style.display='none'" title="Close">✕</button>
@@ -302,7 +306,7 @@
             <!-- Input Bar -->
             <div class="chat-input-wrap">
                 <div class="chat-input-row">
-                    <button class="chat-attach-btn" onclick="document.getElementById('fileInput').click()" title="Attach file">📎</button>
+                    <button class="chat-attach-btn" onclick="document.getElementById('fileInput').click()" title="Attach file"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12l-8.5 8.5a5 5 0 0 1-7-7L14 5a3.5 3.5 0 0 1 5 5l-8.5 8.5a2 2 0 0 1-3-3L15 8"/></svg></button>
                     <input type="file" class="file-input" id="fileInput" multiple onchange="handleFiles(this.files)">
                     <textarea class="chat-text-input" id="chatTextInput" placeholder="Type a message..." rows="1" onkeydown="chatKeyDown(event)" oninput="autoResizeTextarea(this)"></textarea>
                     <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()" title="Send">
@@ -721,5 +725,12 @@ function toggleHelpModal() {
     </div>
 </div>
 
+<script>
+function openLaunch(){document.getElementById('launch').classList.add('open')}
+function closeLaunch(){document.getElementById('launch').classList.remove('open')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLaunch()});
+(function(){var els=document.querySelectorAll('[data-reveal]');if(!('IntersectionObserver' in window)){els.forEach(function(x){x.classList.add('in')});return}
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});els.forEach(function(x){io.observe(x)})})();
+</script>
 </body>
 </html>
